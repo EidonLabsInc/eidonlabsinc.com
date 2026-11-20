@@ -12,12 +12,10 @@
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.65}
-  .band{background:var(--band);color:#fff}
   .wrap{max-width:880px;margin:0 auto;padding:0 24px}
-  .band .wrap{display:flex;justify-content:space-between;align-items:baseline;padding-top:22px;padding-bottom:22px}
-  .brand{font-size:20px;font-weight:700;letter-spacing:.14em}
-  .brand span{color:var(--accent)}
-  .place{font-size:13px;color:#aeb8c4;letter-spacing:.06em}
+  .logo-band{background:#010310;text-align:center;padding:40px 24px 26px}
+  .logo-band img{width:min(330px,78vw);height:auto;display:block;margin:0 auto}
+  .place{font-size:13px;color:#8d99a8;letter-spacing:.22em;text-transform:uppercase;margin-top:14px}
   .hero{padding:64px 0 8px}
   .hero h1{font-size:34px;line-height:1.25;margin:0 0 16px;font-weight:700}
   .hero p{font-size:17px;color:var(--muted);margin:0;max-width:640px}
@@ -37,11 +35,9 @@
 </style>
 </head>
 <body>
-  <div class="band">
-    <div class="wrap">
-      <div class="brand">EIDON LABS <span>INC</span></div>
-      <div class="place">Charleston, Illinois</div>
-    </div>
+  <div class="logo-band">
+    <img src="logo.jpg" alt="Eidon Labs">
+    <div class="place">Charleston, Illinois</div>
   </div>
 
   <div class="wrap">
@@ -68,6 +64,12 @@
       <h2>About</h2>
       <p>Our work starts from a simple standard: a claim should be checked against the record, not against how true it sounds. We apply that standard to the AI systems we build and to the tools we make for everyone else.</p>
       <p>Eidon Labs Inc is a small, founder-led company. We design, build, and support our software ourselves.</p>
+    </section>
+
+    <section class="about">
+      <h2>Research</h2>
+      <p><strong>Report EL-RR-2026-001, October 2026.</strong> "Spontaneous Source Self-Audit in a Deployed AI Companion." In ordinary use, a deployed AI companion twice checked where its own statements had come from, without being prompted: once diagnosing the source of its own retelling error, and once marking words it had constructed as its own at the moment it produced them.</p>
+      <p>The report files the complete event record, a root cause analysis that keeps the deflationary explanation standing, a scan of the research literature and other companion systems, and a reproduction protocol with its predictions registered in advance. It makes no claim about consciousness or inner experience.</p>
     </section>
 
     <section class="contact">
