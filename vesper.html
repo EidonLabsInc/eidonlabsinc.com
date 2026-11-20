@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vesper - Eidon Labs Inc</title>
+  <meta name="description" content="Vesper, the Eidon Labs AI companion: what she is, how she is built, how she is tested, and her measured state today, including the faults we have not fixed yet.">
+  <link rel="icon" href="logo.jpg">
+  <meta property="og:title" content="Vesper - Eidon Labs Inc">
+  <meta property="og:description" content="Vesper, the Eidon Labs AI companion: what she is, how she is built, how she is tested, and her measured state today, including the faults we have not fixed yet.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://eidonlabsinc.com/vesper.html">
+  <meta property="og:image" content="https://eidonlabsinc.com/banner.jpg">
+<style>
+  :root{
+    --ink:#1d2530; --muted:#5b6673; --accent:#b34a12; --line:#e4e8ed; --card:#f7f8fa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background-color:#fff;line-height:1.65;background-image:linear-gradient(to bottom, rgba(64,200,150,.13), rgba(64,200,150,.05) 34%, rgba(64,200,150,0) 62%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%231d3550' stroke-opacity='0.055'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%231d3550' stroke-opacity='0.055'/%3E%3C/svg%3E")}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  .banner{background:#02081a}
+  .banner img{width:100%;height:clamp(118px,32vw,430px);object-fit:cover;object-position:center 40%;display:block}
+  .place{background:#02081a;text-align:center;font-size:12px;color:#8d99a8;letter-spacing:.22em;text-transform:uppercase;padding:0 24px 16px}
+  .hero{padding:64px 0 8px}
+  .hero h1{font-size:32px;line-height:1.25;margin:0 0 14px;font-weight:700}
+  .hero p{font-size:17px;color:var(--muted);margin:0;max-width:660px}
+  section{padding:36px 0}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+  .entry{border-top:1px solid var(--line);padding:26px 0}
+  .entry:first-of-type{border-top:none}
+  .entry h3{margin:0 0 4px;font-size:20px}
+  .entry .meta{color:var(--muted);font-size:13px;letter-spacing:.05em;margin:0 0 12px}
+  .entry p{margin:0 0 12px;max-width:700px}
+  .entry ul{margin:0 0 12px;padding-left:20px;max-width:700px}
+  .entry li{margin-bottom:6px}
+  .entry h4{margin:18px 0 8px;font-size:16px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+  <div class="banner">
+    <img src="banner.jpg" alt="Eidon Labs. AI, Robotics, Advanced Innovation.">
+  </div>
+  <div class="place">Charleston, Illinois</div>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1>Vesper</h1>
+      <p>Vesper is our AI companion: a conversational partner with her own memory, her own library, and a specialty in helping players with the games they are playing. She is in trial on phones today. This paper says what she is, how she is built, how she is tested, and exactly where she stands, including the faults we have not fixed yet.</p>
+      <p style="margin-top:14px"><a href="index.html">Back to the home page</a> &middot; <a href="index.html#chatTile">Talk with Vesper</a></p>
+    </div>
+
+    <section>
+      <h2>What she is</h2>
+      <div class="entry">
+        <p>Vesper talks with people, remembers them, and helps them. Conversation comes first: she is built to answer the thing itself, warmly and in full, and to keep what each person tells her in that person's own private memory, in their own words.</p>
+        <p>Her second skill is game help. Players ask her about quests, missions, bosses, and the current state of their games, and she answers from material gathered for that answer: which patch the game is on, what the maintained wikis and official notes say, and what a named quest actually involves. Game knowledge lives in a separate repository, organized by game, version, expansion, and patch. Conversation memory stays personal, one file per person, and the two never mix.</p>
+        <p>Trial places are by invitation token. The same token works in the phone app and in the chat tile on our home page.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>How she is built</h2>
+      <div class="entry">
+        <ul>
+          <li><strong>Service and app.</strong> The live service stands at version 0.5.34 and the Android app at version 0.4.5, as of November 19, 2026. The service is hosted for us and reached from the phone app and from the chat tile on this site.</li>
+          <li><strong>Her brain.</strong> She runs on the Qwen3-30B-A3B language model. Larger models have been trialed against her test battery, most recently an 80 billion and a 235 billion parameter model on November 19, 2026. The 235 billion model failed its proof run outright. The 80 billion model scored well in its trial and was not adopted. She stands on the 30B because it is the model that has carried her live service, and our standing rule returns her to it whenever a trial does not earn the seat outright.</li>
+          <li><strong>Memory.</strong> Each person's facts are filed per person, in the teller's own words, through a narrow door that accepts plain standing facts about the teller and nothing else. A fact one person tells her is never served to another.</li>
+          <li><strong>Her library.</strong> Her reading library is live, built on the Project Gutenberg catalog of 79,827 books, fetched on demand. She also keeps a study program: set topics she reads up on and files, so her knowledge grows between conversations.</li>
+          <li><strong>Voice.</strong> Her spoken voice is Emma, from the Kokoro voice set. Spoken replies are stripped of punctuation and formatting marks before they are read aloud; the written text keeps its formatting. She checks facts quietly behind the scenes and never reads out source lists.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>How she is tested</h2>
+      <div class="entry">
+        <p>Most companion products are tested by whether answers sound good. Vesper is tested by whether answers are true.</p>
+        <ul>
+          <li><strong>A standing battery.</strong> A fixed set of 29 test cases, built from real failures, is run against every build before it ships. Every fault she has ever been caught in becomes a permanent case.</li>
+          <li><strong>Live source checking.</strong> Every specific claim in a game answer is checked against live sources before the answer counts: official patch notes and maintained wikis first, undated pages and content farms last.</li>
+          <li><strong>The test loop.</strong> Every half hour, a test loop asks her five fresh game questions of the same kind players ask: pinned help with a named quest or boss, a current state question, an ambiguous question with no name given where the right move is to ask which quest, a question about content that does not exist where the right move is to say so, and a walkthrough or build question. Each round is graded against sources and logged. On November 19, 2026 the loop ran twelve rounds.</li>
+          <li><strong>The babysitter watch.</strong> A second watch reads her website chat answers as they happen and grades them by the same rules, checks that facts people state plainly were actually filed to their memory, and watches for misuse and runaway cost. Catches are reported at once, not batched.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Measured state today</h2>
+      <div class="entry">
+        <p class="meta">November 19, 2026</p>
+        <ul>
+          <li><strong>Battery: 22 of 29</strong> on the current build, service 0.5.34. Her standing mark is 27 of 29, set on an earlier build. The current build is below the mark, and we say so here because the number is the point of publishing it.</li>
+          <li><strong>Test loop, latest rounds:</strong> rounds 11 and 12 of the half hour loop each scored 2 of 5. She is reliable on the trap shapes: asked about a fifth mission with no name, she asks which mission; handed a false premise, she corrects it. She is weakest on long walkthroughs and on current state details.</li>
+          <li><strong>Cost:</strong> her metered running cost for November stood at $0.68 across 2,068 turns at the November 19, 2026 count.</li>
+        </ul>
+        <h4>The fault classes we are still fighting, named plainly</h4>
+        <ul>
+          <li>Invented quests, walkthrough steps, and items that do not exist in the game.</li>
+          <li>Wrong or stale version stamps on current state answers, sometimes contradicted inside the same answer.</li>
+          <li>Broken guides with empty steps, and empty placeholder answers that point at guidance the answer does not contain.</li>
+          <li>Raw internal tool markup reaching the player in place of an answer.</li>
+          <li>A correct correction written in draft and then stripped before delivery, leaving the player with no answer at all.</li>
+          <li>An answer repeated from an earlier question in place of an answer to the question asked.</li>
+          <li>Cross-game contamination: one game's features carried into an answer about another game.</li>
+          <li>False denial of a real thing, the fault that once had her deny any knowledge of Isaac Asimov and his Three Laws. That one is fixed, and the exchange is a permanent test case.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>The Xbox work</h2>
+      <div class="entry">
+        <p>An Xbox version of Vesper is in development through the Microsoft Partner Center program, as a non-game app. It does not exist as a product yet, and nothing on this page should be read as saying it does. The planned shape, settled in November 2026: subscriptions sold through the Microsoft Store at $4.99 a month for chat and $9.99 a month for chat plus game assist, with a one week free trial of the full version through Microsoft's own system. The launch language is English only. Game Mode on the app road stays advice only: nothing that would make Vesper look like a game, a game service, or a player network ships there.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Limits and open questions</h2>
+      <div class="entry">
+        <ul>
+          <li>Her game answers are not yet reliable enough to leave unwatched. The battery score on the current build is below her own standing mark, and long walkthroughs remain her weakest shape. That is why the test loop and the babysitter watch run standing, not once.</li>
+          <li>She runs on a hosted model, not on hardware we own. Her brain can be changed by her provider in ways we can only catch by testing, which is one reason the battery runs on every build.</li>
+          <li>Her library reads books on demand from a public catalog. Fetching the full text of the books she studies depends on that catalog being reachable, and that proof is still owed on some titles.</li>
+          <li>The Xbox version is in development. The prices and trial shape above are the plan as settled, and planned prices and features may change before anything is sold.</li>
+          <li>She is a companion, not a professional. Nothing she says is medical, legal, or financial advice.</li>
+        </ul>
+        <p><a href="index.html#chatTile">Talk with Vesper</a> &middot; <a href="research.html">Our research page</a></p>
+      </div>
+    </section>
+
+    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved. &middot; <a href="index.html">Home</a> &middot; <a href="privacy.html">Privacy</a></footer>
+  </div>
+
+<style>
+  .desk-btn{position:fixed;right:18px;bottom:18px;z-index:50;background:#12233d;color:#fff;border:1px solid #2c4a73;border-radius:999px;padding:12px 18px;font-size:14px;cursor:pointer;box-shadow:0 6px 18px rgba(10,20,35,.35)}
+  .desk-btn:hover{background:#1a3157}
+  .desk-panel{position:fixed;right:18px;bottom:72px;z-index:50;width:320px;max-width:calc(100vw - 36px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 40px rgba(10,20,35,.28);overflow:hidden}
+  .desk-head{background:#12233d;color:#fff;padding:12px 16px}
+  .desk-head h3{margin:0;font-size:15px}
+  .desk-head p{margin:2px 0 0;font-size:12px;color:#b9c9de}
+  .desk-log{height:190px;overflow-y:auto;padding:12px 16px;font-size:13px;line-height:1.5}
+  .desk-log p{margin:0 0 8px}
+  .desk-log .d-u{text-align:right;color:#41546e}
+  .desk-log .d-b{color:#1d2733}
+  .desk-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
+  .desk-chips button{background:#eef3f9;border:1px solid #c9d6e6;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer;color:#12233d}
+  .desk-form{padding:0 16px 14px}
+  .desk-form input,.desk-form textarea{width:100%;box-sizing:border-box;border:1px solid #c9d6e6;border-radius:6px;padding:8px;font-size:13px;margin:0 0 8px;font-family:inherit}
+  .desk-form textarea{height:74px;resize:vertical}
+  .desk-form button{background:#12233d;color:#fff;border:0;border-radius:6px;padding:9px 14px;font-size:13px;cursor:pointer;width:100%}
+  .desk-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+</style>
+<div class="desk-panel" id="deskPanel" hidden>
+  <div class="desk-head">
+    <h3>Chat with us</h3>
+    <p>The Eidon Labs front desk. I am a simple bot.</p>
+  </div>
+  <div class="desk-log" id="deskLog">
+    <p class="d-b">Hello. I can answer a few set questions, or take a message for the team. A person reads every message.</p>
+  </div>
+  <div class="desk-chips" id="deskChips">
+    <button type="button" data-q="build">What do you build?</button>
+    <button type="button" data-q="trial">How does the Vesper trial work?</button>
+    <button type="button" data-q="person">I want to talk to a person</button>
+  </div>
+  <div class="desk-form" id="deskForm" hidden>
+    <input type="text" id="deskName" placeholder="Your name" aria-label="Your name">
+    <input type="text" id="deskContact" placeholder="Email or phone, so we can reply" aria-label="Email or phone">
+    <textarea id="deskMsg" placeholder="Your message" aria-label="Your message"></textarea>
+    <span class="desk-hp"><input type="text" id="deskCompany" tabindex="-1" autocomplete="off" aria-hidden="true"></span>
+    <button type="button" id="deskSend">Send message</button>
+  </div>
+</div>
+<button class="desk-btn" id="deskBtn" type="button">Chat with us</button>
+<script>
+(function(){
+  var panel = document.getElementById('deskPanel');
+  var log = document.getElementById('deskLog');
+  var form = document.getElementById('deskForm');
+  var answers = {
+    build: 'We build AI companions people can talk with, and tools that check claims against the record of what actually happened. Vesper, our companion, is in trial on phones today. Our research is gathered on this site.',
+    trial: 'The Vesper trial runs on phones for a small group today, by invitation. Leave us a message with how to reach you, and we will let you know when more places open up.',
+    person: 'Of course. Fill in the short form and your message goes straight to our team. A person reads every message and will get back to you.'
+  };
+  function add(text, cls){
+    var p = document.createElement('p');
+    p.className = cls;
+    p.textContent = text;
+    log.appendChild(p);
+    log.scrollTop = log.scrollHeight;
+  }
+  document.getElementById('deskBtn').addEventListener('click', function(){
+    panel.hidden = !panel.hidden;
+  });
+  document.getElementById('deskChips').addEventListener('click', function(e){
+    var b = e.target.closest('button');
+    if(!b) return;
+    var q = b.getAttribute('data-q');
+    add(b.textContent, 'd-u');
+    add(answers[q], 'd-b');
+    if(q === 'person'){ form.hidden = false; }
+  });
+  document.getElementById('deskSend').addEventListener('click', function(){
+    var name = document.getElementById('deskName').value.trim();
+    var contact = document.getElementById('deskContact').value.trim();
+    var msg = document.getElementById('deskMsg').value.trim();
+    if(!name || !contact || !msg){ add('Please fill in your name, how to reach you, and your message.', 'd-b'); return; }
+    var btn = this;
+    btn.disabled = true;
+    fetch('https://vesper-eidon-labs.fly.dev/contact', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name: name, contact: contact, message: msg, company: document.getElementById('deskCompany').value})
+    }).then(function(r){
+      if(r.ok){ add('Thank you. Your message is on its way to our team.', 'd-b'); form.hidden = true; }
+      else { add('That did not go through. You can also email support@eidonlabsinc.com.', 'd-b'); }
+    }).catch(function(){
+      add('That did not go through. You can also email support@eidonlabsinc.com.', 'd-b');
+    }).then(function(){ btn.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>

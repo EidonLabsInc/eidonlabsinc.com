@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AlphaAudit - Eidon Labs Inc</title>
+  <meta name="description" content="AlphaAudit, the Eidon Labs trading claim audit: how a trade log is rebuilt trade by trade, how fees and fills are checked, the verdicts it gives, and its first public audit.">
+  <link rel="icon" href="logo.jpg">
+  <meta property="og:title" content="AlphaAudit - Eidon Labs Inc">
+  <meta property="og:description" content="AlphaAudit, the Eidon Labs trading claim audit: how a trade log is rebuilt trade by trade, how fees and fills are checked, the verdicts it gives, and its first public audit.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://eidonlabsinc.com/alphaaudit.html">
+  <meta property="og:image" content="https://eidonlabsinc.com/banner.jpg">
+<style>
+  :root{
+    --ink:#1d2530; --muted:#5b6673; --accent:#b34a12; --line:#e4e8ed; --card:#f7f8fa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background-color:#fff;line-height:1.65;background-image:linear-gradient(to bottom, rgba(64,200,150,.13), rgba(64,200,150,.05) 34%, rgba(64,200,150,0) 62%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%231d3550' stroke-opacity='0.055'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%231d3550' stroke-opacity='0.055'/%3E%3C/svg%3E")}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  .banner{background:#02081a}
+  .banner img{width:100%;height:clamp(118px,32vw,430px);object-fit:cover;object-position:center 40%;display:block}
+  .place{background:#02081a;text-align:center;font-size:12px;color:#8d99a8;letter-spacing:.22em;text-transform:uppercase;padding:0 24px 16px}
+  .hero{padding:64px 0 8px}
+  .hero h1{font-size:32px;line-height:1.25;margin:0 0 14px;font-weight:700}
+  .hero p{font-size:17px;color:var(--muted);margin:0;max-width:660px}
+  section{padding:36px 0}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+  .entry{border-top:1px solid var(--line);padding:26px 0}
+  .entry:first-of-type{border-top:none}
+  .entry h3{margin:0 0 4px;font-size:20px}
+  .entry .meta{color:var(--muted);font-size:13px;letter-spacing:.05em;margin:0 0 12px}
+  .entry p{margin:0 0 12px;max-width:700px}
+  .entry ul{margin:0 0 12px;padding-left:20px;max-width:700px}
+  .entry li{margin-bottom:6px}
+  .entry h4{margin:18px 0 8px;font-size:16px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+  <div class="banner">
+    <img src="banner.jpg" alt="Eidon Labs. AI, Robotics, Advanced Innovation.">
+  </div>
+  <div class="place">Charleston, Illinois</div>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1>AlphaAudit</h1>
+      <p>AlphaAudit answers two questions about any trading track record: was the strategy any good, and were the trades even real? Give it a list of trades and it rebuilds the results from the fills themselves, measures what the fees really cost, compares the record against simply buying and holding, checks the fills against the market, and gives a verdict. No predictions, no advice. Measurement.</p>
+      <p style="margin-top:14px"><a href="index.html">Back to the home page</a> &middot; <a href="research.html">Our research page</a></p>
+    </div>
+
+    <section>
+      <h2>The problem</h2>
+      <div class="entry">
+        <p>Trading systems are sold on claims: a win rate, a profit figure, a screenshot of a balance. The claims are easy to state and, for a buyer, almost impossible to check. A record can hide its fees, cherry pick its period, count its trades in the order that flatters it, or rest on fills that never happened at all. What a claim needs is not a better story. It needs an audit: the same fills, rebuilt in order, measured the same way every time, with the assumptions stated where anyone can read them.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Method</h2>
+      <div class="entry">
+        <ul>
+          <li><strong>The input is a trade log.</strong> A CSV file, one row per fill: time, symbol, side, quantity, price, fee. Most exchange exports work as they are; the headers are matched flexibly, and anything the tool cannot read fails loudly instead of being guessed at.</li>
+          <li><strong>The record is rebuilt trade by trade, in order.</strong> Positions are closed first in, first out, in both directions: a sell closes the oldest long first, a buy closes shorts before it opens a long. From the rebuilt record the tool measures win rate, profit factor, expectancy, maximum drawdown, and the result net of fees.</li>
+          <li><strong>Fee drag is measured, not assumed away.</strong> Fees are the whole point of the audit, and the tool never guesses them: if an export has no fee column, one has to be added before the audit runs. The report states the gross result, the fees, and what the fees consumed.</li>
+          <li><strong>The record is compared against buy and hold.</strong> A strategy that works hard to end up behind simply owning the asset has its answer, whatever its win rate says.</li>
+          <li><strong>Claims are tested against the measurements.</strong> A seller's stated win rate, profit factor, or net figure can be handed to the audit with the log, and the report checks the claim against the measured numbers and says plainly whether it holds.</li>
+        </ul>
+        <h4>Were the trades even real?</h4>
+        <p>A separate verification pass checks every fill against real historical market data. It flags a fill printed at a price the market never touched that day, which is the tell of a fake platform; a stock fill dated on a day the market was closed; and a symbol no market data exists for. Each record comes back VERIFIED, SUSPICIOUS, or UNVERIFIABLE. The desktop app pairs this with a broker and platform red-flag checklist, the manual half of scam detection.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Verdicts</h2>
+      <div class="entry">
+        <ul>
+          <li><strong>PASS.</strong> At least 30 closed trades, a net positive result, sane fees, and any stated claims verified against the measurements.</li>
+          <li><strong>FAIL.</strong> A net result at or below zero, fees that consumed the gross profit, or a stated claim contradicted beyond tolerance.</li>
+          <li><strong>NOT ENOUGH DATA.</strong> Fewer than 30 closed trades. The statistics are shown, and the verdict is withheld. This is a feature, not a gap: most supposedly proven systems die exactly here, on a record too short to prove anything.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Public Audit 001</h2>
+      <p>AlphaAudit's first public audit was run on a claimed record of 189 signals: the output of our own house signal engine, handed to the tool as a track record to verify. Rebuilt trade by trade, the record showed a $179,000 loss under an 820 percent fee drag: the costs of trading the system were more than eight times what the trading itself made. Verdict: FAIL.</p>
+      <p>We publish that audit first, on a record of our own, because an audit tool that has never failed its own house has told you nothing about itself.</p>
+    <h2>Limits and open questions</h2>
+      <div class="entry">
+        <ul>
+          <li>Modeled fees are stated, not hidden. The Audit 001 record paid no real fees; the audit modeled them at 0.6 percent per fill and said so in its own report. A record with real fee data gets a harder audit than a modeled one.</li>
+          <li>Coverage has edges. The audit engine works from trade logs, spot records first; options and futures are not modeled yet, and it audits track records, not ideas: it does not replay a strategy to see what it might do next.</li>
+          <li>The authenticity check is only as good as the historical market data behind it. A record can come back UNVERIFIABLE, and that word means what it says: not proven false, not proven real.</li>
+          <li>AlphaAudit is not a broker and not an advisor. It never says what to buy or sell, and a PASS is a statement about a past record, not a promise about a future one.</li>
+        </ul>
+        <p><a href="research.html">Our research page</a> &middot; <a href="index.html">Back to the home page</a></p>
+      </div>
+    </section>
+
+    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved. &middot; <a href="index.html">Home</a> &middot; <a href="privacy.html">Privacy</a></footer>
+  </div>
+
+<style>
+  .desk-btn{position:fixed;right:18px;bottom:18px;z-index:50;background:#12233d;color:#fff;border:1px solid #2c4a73;border-radius:999px;padding:12px 18px;font-size:14px;cursor:pointer;box-shadow:0 6px 18px rgba(10,20,35,.35)}
+  .desk-btn:hover{background:#1a3157}
+  .desk-panel{position:fixed;right:18px;bottom:72px;z-index:50;width:320px;max-width:calc(100vw - 36px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 40px rgba(10,20,35,.28);overflow:hidden}
+  .desk-head{background:#12233d;color:#fff;padding:12px 16px}
+  .desk-head h3{margin:0;font-size:15px}
+  .desk-head p{margin:2px 0 0;font-size:12px;color:#b9c9de}
+  .desk-log{height:190px;overflow-y:auto;padding:12px 16px;font-size:13px;line-height:1.5}
+  .desk-log p{margin:0 0 8px}
+  .desk-log .d-u{text-align:right;color:#41546e}
+  .desk-log .d-b{color:#1d2733}
+  .desk-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
+  .desk-chips button{background:#eef3f9;border:1px solid #c9d6e6;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer;color:#12233d}
+  .desk-form{padding:0 16px 14px}
+  .desk-form input,.desk-form textarea{width:100%;box-sizing:border-box;border:1px solid #c9d6e6;border-radius:6px;padding:8px;font-size:13px;margin:0 0 8px;font-family:inherit}
+  .desk-form textarea{height:74px;resize:vertical}
+  .desk-form button{background:#12233d;color:#fff;border:0;border-radius:6px;padding:9px 14px;font-size:13px;cursor:pointer;width:100%}
+  .desk-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+</style>
+<div class="desk-panel" id="deskPanel" hidden>
+  <div class="desk-head">
+    <h3>Chat with us</h3>
+    <p>The Eidon Labs front desk. I am a simple bot.</p>
+  </div>
+  <div class="desk-log" id="deskLog">
+    <p class="d-b">Hello. I can answer a few set questions, or take a message for the team. A person reads every message.</p>
+  </div>
+  <div class="desk-chips" id="deskChips">
+    <button type="button" data-q="build">What do you build?</button>
+    <button type="button" data-q="trial">How does the Vesper trial work?</button>
+    <button type="button" data-q="person">I want to talk to a person</button>
+  </div>
+  <div class="desk-form" id="deskForm" hidden>
+    <input type="text" id="deskName" placeholder="Your name" aria-label="Your name">
+    <input type="text" id="deskContact" placeholder="Email or phone, so we can reply" aria-label="Email or phone">
+    <textarea id="deskMsg" placeholder="Your message" aria-label="Your message"></textarea>
+    <span class="desk-hp"><input type="text" id="deskCompany" tabindex="-1" autocomplete="off" aria-hidden="true"></span>
+    <button type="button" id="deskSend">Send message</button>
+  </div>
+</div>
+<button class="desk-btn" id="deskBtn" type="button">Chat with us</button>
+<script>
+(function(){
+  var panel = document.getElementById('deskPanel');
+  var log = document.getElementById('deskLog');
+  var form = document.getElementById('deskForm');
+  var answers = {
+    build: 'We build AI companions people can talk with, and tools that check claims against the record of what actually happened. Vesper, our companion, is in trial on phones today. Our research is gathered on this site.',
+    trial: 'The Vesper trial runs on phones for a small group today, by invitation. Leave us a message with how to reach you, and we will let you know when more places open up.',
+    person: 'Of course. Fill in the short form and your message goes straight to our team. A person reads every message and will get back to you.'
+  };
+  function add(text, cls){
+    var p = document.createElement('p');
+    p.className = cls;
+    log.appendChild(p);
+    log.scrollTop = log.scrollHeight;
+  }
+  document.getElementById('deskBtn').addEventListener('click', function(){
+    panel.hidden = !panel.hidden;
+  });
+  document.getElementById('deskChips').addEventListener('click', function(e){
+    var b = e.target.closest('button');
+    if(!b) return;
+    var q = b.getAttribute('data-q');
+    add(b.textContent, 'd-u');
+    add(answers[q], 'd-b');
+    if(q === 'person'){ form.hidden = false; }
+  });
+  document.getElementById('deskSend').addEventListener('click', function(){
+    var name = document.getElementById('deskName').value.trim();
+    var contact = document.getElementById('deskContact').value.trim();
+    var msg = document.getElementById('deskMsg').value.trim();
+    if(!name || !contact || !msg){ add('Please fill in your name, how to reach you, and your message.', 'd-b'); return; }
+    var btn = this;
+    btn.disabled = true;
+    fetch('https://vesper-eidon-labs.fly.dev/contact', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name: name, contact: contact, message: msg, company: document.getElementById('deskCompany').value})
+    }).then(function(r){
+      if(r.ok){ add('Thank you. Your message is on its way to our team.', 'd-b'); form.hidden = true; }
+      else { add('That did not go through. You can also email support@eidonlabsinc.com.', 'd-b'); }
+    }).catch(function(){
+      add('That did not go through. You can also email support@eidonlabsinc.com.', 'd-b');
+    }).then(function(){ btn.disabled = false; });
+  });
+})();
+</script>
+</body>
+</html>

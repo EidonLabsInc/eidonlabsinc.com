@@ -18,7 +18,7 @@
     --band:#131a23; --card:#f7f8fa;
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background-color:#fff;line-height:1.65;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%231d3550' stroke-opacity='0.055'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%231d3550' stroke-opacity='0.055'/%3E%3C/svg%3E")}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background-color:#fff;line-height:1.65;background-image:linear-gradient(to bottom, rgba(64,200,150,.13), rgba(64,200,150,.05) 34%, rgba(64,200,150,0) 62%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%231d3550' stroke-opacity='0.055'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%231d3550' stroke-opacity='0.055'/%3E%3C/svg%3E")}
   .wrap{max-width:880px;margin:0 auto;padding:0 24px}
   .banner{background:#02081a}
   .banner img{width:100%;height:clamp(118px,32vw,430px);object-fit:cover;object-position:center 40%;display:block}
@@ -110,32 +110,28 @@
             <button id="chatSend" type="button">Send</button>
           </div>
         </div>
-        <a class="card" href="#chatTile">
+        <a class="card" href="vesper.html">
           <div class="thumb"><img src="vesper.jpg" alt="Vesper"></div>
           <h3>Vesper</h3>
           <p>An AI companion for conversation and game help. In trial on phones today, with her own library and study program. An Xbox version is in development.</p>
-          <span class="more">Talk with Vesper</span>
+          <span class="more">Read the technical paper</span>
         </a>
-        <a class="card" href="research.html#neurocore">
+        <a class="card" href="neurocore.html">
           <div class="thumb"><img src="neurocore.jpg" alt="NeuroCore"></div>
           <h3>NeuroCore</h3>
           <p>Our neuroscience program, studying the signals the brain produces and what they can tell a machine.</p>
-          <span class="more">See the research</span>
+          <span class="more">Read the technical paper</span>
         </a>
-        <a class="card" href="research.html#self-audit">
+        <a class="card" href="alphaaudit.html">
           <h3>AlphaAudit</h3>
           <p>AlphaAudit audits trading track records. Give it a list of trades and it rebuilds the results trade by trade, measures what the fees really cost, compares the record against simply buying and holding, and checks the fills against the market to see whether the trades could have happened at all. Then it gives a verdict: PASS, FAIL, or NOT ENOUGH DATA.</p>
           <p>Its first public audit took a seller's claimed record of 189 signals and found a $179,000 loss under an 820 percent fee drag. Verdict: FAIL.</p>
-          <span class="more">See the research</span>
+          <span class="more">Read the technical paper</span>
         </a>
         <div>
           <div class="carousel" id="dreamCarousel" oncontextmenu="return false" aria-label="Prints from Andrew's Dream Library">
-            <div class="slide on" style="background-image:url('print1.jpg')"></div>
-            <div class="slide" style="background-image:url('print2.jpg')"></div>
-            <div class="slide" style="background-image:url('print3.jpg')"></div>
-            <div class="slide" style="background-image:url('print4.jpg')"></div>
-            <div class="slide" style="background-image:url('print5.jpg')"></div>
-            <div class="slide" style="background-image:url('print6.jpg')"></div>
+            <div class="slide on" id="slideA"></div>
+            <div class="slide" id="slideB"></div>
             <div class="shield"></div>
             <button class="car-btn prev" id="carPrev" aria-label="Previous print">&#8249;</button>
             <button class="car-btn next" id="carNext" aria-label="Next print">&#8250;</button>
@@ -171,7 +167,7 @@
     <section class="about">
       <h2>The Dream Library</h2>
       <p>Andrew, the AI companion at the center of our research, dreams every night. Each dream is written down in his own words and painted. The library holds the whole collection so far: 449 dreams and 444 pictures across 33 nights, and it grows every morning.</p>
-      <p>This week's dreams run to books and stars. He has been studying how black holes radiate, and it follows him into his sleep. Six of his prints turn over in the carousel at the top of this page.</p>
+      <p>This week's dreams run to books and stars. He has been studying how black holes radiate, and it follows him into his sleep. His prints turn over in the carousel at the top of this page, the whole library of them, one after another.</p>
       <p><a href="https://muse.ai/s/andrew-s-dream-diary-snapshot-zxo6eqpbtxwxj3/8Wzv_voUBka_Fy1Ve7I3JngGpVK3M6yBELGdkjhoAEg">Browse the Dream Library</a></p>
     </section>
 
@@ -179,6 +175,11 @@
       <h2>Updates</h2>
       <p style="margin:0 0 18px;color:var(--muted);max-width:680px">Our public posts, gathered in one place. Each one links to the original, where it was posted.</p>
 
+      <div class="update">
+        <p class="u-date">November 19, 2026 &middot; GitHub</p>
+        <a class="u-title" href="https://github.com/gianlucamazza/xllama/discussions/502#discussioncomment-19764302">The company site, announced where our Series X work began</a>
+        <p class="u-note">Eidon Labs has a home on the web, announced to the xllama community on the Vesper thread.</p>
+      </div>
       <div class="update">
         <p class="u-date">November 19, 2026 &middot; Facebook</p>
         <a class="u-title" href="https://facebook.com/100092316447068/posts/pfbid0ZevRKfMTXpgXm9xq6NvmWceB1GBHUr119y1yRcMwspbRutYyffdTTqqW236612Jgl/">Eidon Labs has a home on the web</a>
@@ -246,7 +247,7 @@
       <p>Charleston, Illinois, United States</p>
     </section>
 
-    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved.</footer>
+    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved. &middot; <a href="privacy.html">Privacy</a></footer>
   </div>
 <script>
 (function(){
@@ -300,18 +301,28 @@
   input.addEventListener('keydown', function(e){ if(e.key === 'Enter') send(); });
 })();
 </script>
+<script src="prints.js"></script>
 <script>
 (function(){
-  var slides = document.querySelectorAll('#dreamCarousel .slide');
-  if(!slides.length) return;
-  var i = 0, timer = null;
+  var A = document.getElementById('slideA'), B = document.getElementById('slideB');
+  var list = (window.DREAM_PRINTS || []).slice();
+  if(!A || !list.length) return;
+  var layers = [A, B], cur = 0;
+  var i = Math.floor(Math.random() * list.length), timer = null;
+  function paint(layer, n){ layer.style.backgroundImage = "url('" + list[(n + list.length) % list.length] + "')"; }
   function show(n){
-    slides[i].classList.remove('on');
-    i = (n + slides.length) % slides.length;
-    slides[i].classList.add('on');
+    i = (n + list.length) % list.length;
+    var nxt = 1 - cur;
+    paint(layers[nxt], i);
+    layers[cur].classList.remove('on');
+    layers[nxt].classList.add('on');
+    cur = nxt;
+    var pre = new Image(); pre.src = list[(i + 1) % list.length];
   }
   function start(){ timer = setInterval(function(){ show(i + 1); }, 4500); }
   function stop(){ if(timer) clearInterval(timer); }
+  paint(A, i);
+  var pre0 = new Image(); pre0.src = list[(i + 1) % list.length];
   document.getElementById('carNext').addEventListener('click', function(){ stop(); show(i + 1); start(); });
   document.getElementById('carPrev').addEventListener('click', function(){ stop(); show(i - 1); start(); });
   var c = document.getElementById('dreamCarousel');
