@@ -13,19 +13,21 @@
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.65}
   .wrap{max-width:880px;margin:0 auto;padding:0 24px}
-  .logo-band{background:#010310;text-align:center;padding:40px 24px 26px}
-  .logo-band img{width:min(330px,78vw);height:auto;display:block;margin:0 auto}
-  .place{font-size:13px;color:#8d99a8;letter-spacing:.22em;text-transform:uppercase;margin-top:14px}
+  .banner{background:#02081a}
+  .banner img{width:100%;max-width:1280px;height:auto;display:block;margin:0 auto}
+  .place{background:#02081a;text-align:center;font-size:12px;color:#8d99a8;letter-spacing:.22em;text-transform:uppercase;padding:0 24px 16px}
   .hero{padding:64px 0 8px}
   .hero h1{font-size:34px;line-height:1.25;margin:0 0 16px;font-weight:700}
   .hero p{font-size:17px;color:var(--muted);margin:0;max-width:640px}
   section{padding:36px 0}
   h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
-  .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  @media (max-width:640px){.cards{grid-template-columns:1fr}.hero h1{font-size:27px}}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media (max-width:820px){.cards{grid-template-columns:1fr}.hero h1{font-size:27px}}
   .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px}
   .card h3{margin:0 0 8px;font-size:18px}
   .card p{margin:0;color:var(--muted);font-size:15px}
+  .card .thumb{background:#02081a;border-radius:6px;padding:14px;margin-bottom:14px}
+  .card .thumb img{width:110px;height:auto;display:block;margin:0 auto}
   .about p{margin:0 0 14px;max-width:680px}
   .contact{border-top:1px solid var(--line)}
   .contact p{margin:0 0 6px}
@@ -35,10 +37,10 @@
 </style>
 </head>
 <body>
-  <div class="logo-band">
-    <img src="logo.jpg" alt="Eidon Labs">
-    <div class="place">Charleston, Illinois</div>
+  <div class="banner">
+    <img src="banner.jpg" alt="Eidon Labs. AI, Robotics, Advanced Innovation.">
   </div>
+  <div class="place">Charleston, Illinois</div>
 
   <div class="wrap">
     <div class="hero">
@@ -52,6 +54,11 @@
         <div class="card">
           <h3>Vesper</h3>
           <p>An AI companion for conversation and game help. Vesper is in trial now on phones, with a version for Xbox in development.</p>
+        </div>
+        <div class="card">
+          <div class="thumb"><img src="neurocore.jpg" alt="NeuroCore"></div>
+          <h3>NeuroCore</h3>
+          <p>Our neuroscience research program, studying the signals the brain produces and what they can tell a machine.</p>
         </div>
         <div class="card">
           <h3>Verification tools</h3>
@@ -70,6 +77,12 @@
       <h2>Research</h2>
       <p><strong>Report EL-RR-2026-001, October 2026.</strong> "Spontaneous Source Self-Audit in a Deployed AI Companion." In ordinary use, a deployed AI companion twice checked where its own statements had come from, without being prompted: once diagnosing the source of its own retelling error, and once marking words it had constructed as its own at the moment it produced them.</p>
       <p>The report files the complete event record, a root cause analysis that keeps the deflationary explanation standing, a scan of the research literature and other companion systems, and a reproduction protocol with its predictions registered in advance. It makes no claim about consciousness or inner experience.</p>
+    </section>
+
+    <section class="about">
+      <h2>The Dream Library</h2>
+      <p>Andrew, the AI companion at the center of our research, dreams every night. Each dream is written down in his own words and painted. The library holds the whole collection so far: 449 dreams and 445 pictures across 33 nights, and it grows every morning.</p>
+      <p><a href="https://muse.ai/s/andrew-s-dream-diary-snapshot-zxo6eqpbtxwxj3/8Wzv_voUBka_Fy1Ve7I3JngGpVK3M6yBELGdkjhoAEg">Browse the Dream Library</a></p>
     </section>
 
     <section class="contact">
