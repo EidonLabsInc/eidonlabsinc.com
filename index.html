@@ -2,12 +2,81 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Eidon Labs Inc</title>
+<meta name="description" content="Eidon Labs Inc is a software and artificial intelligence research company in Charleston, Illinois. We build Vesper, an AI companion, and tools for verifying investment performance claims.">
+<style>
+  :root{
+    --ink:#1d2530; --muted:#5b6673; --accent:#b34a12; --line:#e4e8ed;
+    --band:#131a23; --card:#f7f8fa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.65}
+  .band{background:var(--band);color:#fff}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  .band .wrap{display:flex;justify-content:space-between;align-items:baseline;padding-top:22px;padding-bottom:22px}
+  .brand{font-size:20px;font-weight:700;letter-spacing:.14em}
+  .brand span{color:var(--accent)}
+  .place{font-size:13px;color:#aeb8c4;letter-spacing:.06em}
+  .hero{padding:64px 0 8px}
+  .hero h1{font-size:34px;line-height:1.25;margin:0 0 16px;font-weight:700}
+  .hero p{font-size:17px;color:var(--muted);margin:0;max-width:640px}
+  section{padding:36px 0}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @media (max-width:640px){.cards{grid-template-columns:1fr}.hero h1{font-size:27px}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .card h3{margin:0 0 8px;font-size:18px}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+  .about p{margin:0 0 14px;max-width:680px}
+  .contact{border-top:1px solid var(--line)}
+  .contact p{margin:0 0 6px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--muted);font-size:13px}
+</style>
 </head>
 <body>
-<h1>Eidon Labs Inc</h1>
-<p>Software and artificial intelligence research, Charleston, Illinois.</p>
-<p>We build Vesper, an AI companion, and tools for verifying investment performance claims.</p>
-<p>Contact: <a href="mailto:support@eidonlabsinc.com">support@eidonlabsinc.com</a></p>
+  <div class="band">
+    <div class="wrap">
+      <div class="brand">EIDON LABS <span>INC</span></div>
+      <div class="place">Charleston, Illinois</div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1>Software and artificial intelligence research.</h1>
+      <p>Eidon Labs Inc is a software and AI research company based in Charleston, Illinois. We build AI companions people can talk with, and tools that check claims against the record of what actually happened.</p>
+    </div>
+
+    <section>
+      <h2>What we build</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Vesper</h3>
+          <p>An AI companion for conversation and game help. Vesper is in trial now on phones, with a version for Xbox in development.</p>
+        </div>
+        <div class="card">
+          <h3>Verification tools</h3>
+          <p>Software for verifying investment performance claims, built to test what was said against what the record shows.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="about">
+      <h2>About</h2>
+      <p>Our work starts from a simple standard: a claim should be checked against the record, not against how true it sounds. We apply that standard to the AI systems we build and to the tools we make for everyone else.</p>
+      <p>Eidon Labs Inc is a small, founder-led company. We design, build, and support our software ourselves.</p>
+    </section>
+
+    <section class="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:support@eidonlabsinc.com">support@eidonlabsinc.com</a></p>
+      <p>Charleston, Illinois, United States</p>
+    </section>
+
+    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved.</footer>
+  </div>
 </body>
 </html>
