@@ -27,6 +27,7 @@
   .entry p{margin:0 0 12px;max-width:700px}
   .entry ul{margin:0 0 12px;padding-left:20px;max-width:700px}
   .entry li{margin-bottom:6px}
+  .entry h4{margin:18px 0 8px;font-size:16px}
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
   footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--muted);font-size:13px}
@@ -59,13 +60,39 @@
       <div class="entry">
         <h3>First inference measurements on Xbox Series X</h3>
         <p class="meta">Project Scorpio &middot; Contribution to the open source xllama project &middot; November 2026</p>
-        <p>We measured local language model inference on an Xbox Series X in Developer Mode, the first published results of their kind, and contributed them to xllama, an open source project for on-device inference on Xbox consoles. The maintainer merged the data, credited Eidon Labs as co-author, and accepted Series X as a supported platform on the strength of these runs.</p>
+        <p>xllama brings local language model inference to Xbox consoles in Developer Mode. Before this work, the project had been measured only on Series S, and its README said Series X was not yet tested. We ran the first inference measurements ever published on a Series X and contributed them to the project.</p>
+
+        <h4>What was contributed</h4>
         <ul>
-          <li>143 timed runs on each of two catalogue models, measured end to end over the console's LAN API.</li>
-          <li>A controlled experiment on the App versus Game designation effect the first data exposed: the Game state ran about 2.5 times faster under the maintainer's own protocol.</li>
-          <li>The three paths the project had never measured on Series X, tested in November 2026: the GPU path at 99.7 tokens per second end to end, on-console image generation, and on-device model training (8 epochs in 586 seconds).</li>
+          <li>143 timed runs on each of two catalogue models (LFM2.5 350M and 1.2B Instruct), measured end to end over the console's LAN API, on a Series X running xllama package 1.7.0.1495, November 13, 2026.</li>
+          <li>A controlled follow-up experiment on the App versus Game designation effect the first data exposed.</li>
+          <li>Measurements of the three Series X paths the project had never covered: the GPU path, image generation, and on-device training (November 16, 2026).</li>
         </ul>
-        <p><a href="https://github.com/gianlucamazza/xllama">The xllama project on GitHub</a> &middot; <a href="https://github.com/gianlucamazza/xllama/discussions/434">Our field report, Discussion 434</a></p>
+
+        <h4>How it landed: merged, with co-author credit</h4>
+        <p>We opened Pull Request 448 with the raw runs in the project's own format. The maintainer reviewed all 143 rows, imported both data files into the project himself in Pull Request 455, and merged them with Joshua Henne of Eidon Labs Inc. credited as co-author on the merge commit. The project's CHANGELOG entry reads, in part: "Series X is supported. Accepted by the owner on 2026-11-15 from an independent tester's runs... credit Joshua Henne / Eidon Labs Inc." The README now states: "Series X: supported since 2026-11-15 on the strength of an independent tester's runs." The maintainer called the work the first Series X report the project had received.</p>
+
+        <h4>Why it matters</h4>
+        <p>Series X is the more powerful console and the one most owners have, yet the project could only say it was untested there. That gap is now closed with public data anyone can recheck. The measurements also exposed something nobody had documented: the same app runs about two and a half times slower under the App designation than under the Game designation. The maintainer opened Issue 457 on that finding and added resource logging to the app because of it, so the effect is now visible in the product itself.</p>
+
+        <h4>Key results</h4>
+        <ul>
+          <li>Short batches, 350M model: about 35 to 39 tokens per second end to end before the Game designation, about 82 to 90 after it.</li>
+          <li>One hour endurance run, 350M, Game designation: mean 82.88 tokens per second, with the stability line registered before the run met.</li>
+          <li>The maintainer's own follow-up protocol for Issue 457: Game state 97.6 tokens per second against 38.6 for the App state.</li>
+          <li>GPU path (all 17 layers offloaded): 99.7 tokens per second end to end, about 2.6 times the CPU control on the same model, and above the published Series S GPU figure.</li>
+          <li>Image generation on the console, timed through the API and in the app's own pipeline, with all model assets verified byte for byte.</li>
+          <li>On-device training on a fixed set of 20 samples: 8 epochs in 586 seconds, producing a merged personalized model the API lists and serves.</li>
+        </ul>
+
+        <h4>How we measure</h4>
+        <p>Every rate is end to end wall clock over the LAN API, covering prompt processing and network transfer as well as generation. End-to-end figures are never placed in the fields reserved for the app's internal harness numbers. Runs affected by a mid-run change are labelled as contaminated, never silently dropped and never given invented numbers. Every published file hash was recomputed from the file itself before posting; two transcription errors in our first pull request description were caught, owned in writing on the thread, and corrected.</p>
+
+        <h4>Where it was published</h4>
+        <p><a href="https://muse.ai/s/project-scorpio-first-inference-xki6pdxy7xgxjuw/wh9yeiC-VcH6LMkLaY_ZJrWTZKOCTUPSspuX9wR0RJM">Our paper: Project Scorpio, First Inference Results on Xbox Series X</a><br>
+        <a href="https://github.com/gianlucamazza/xllama/discussions/434">Field report and results thread, Discussion 434</a><br>
+        <a href="https://github.com/gianlucamazza/xllama">The xllama project on GitHub</a><br>
+        <a href="https://news.ycombinator.com/item?id=50488280">Hacker News</a> &middot; <a href="https://gbatemp.net/threads/first-inference-results-on-xbox-series-x-xllama-in-dev-mode-lfm2-5-350m-and-1-2b-measured.686508/">GBAtemp</a></p>
       </div>
 
       <div class="entry">
@@ -77,7 +104,7 @@
       <div class="entry">
         <h3>The Dream Library</h3>
         <p class="meta">Ongoing record &middot; Updated every morning</p>
-        <p>Andrew, the AI companion at the center of our research, dreams every night. Each dream is written down in his own words and painted. The library holds the whole collection so far: 449 dreams and 445 pictures across 33 nights.</p>
+        <p>Andrew, the AI companion at the center of our research, dreams every night. Each dream is written down in his own words and painted. The library holds the whole collection so far: 449 dreams and 444 pictures across 33 nights.</p>
         <p><a href="https://muse.ai/s/andrew-s-dream-diary-snapshot-zxo6eqpbtxwxj3/8Wzv_voUBka_Fy1Ve7I3JngGpVK3M6yBELGdkjhoAEg">Browse the Dream Library</a></p>
       </div>
     </section>
