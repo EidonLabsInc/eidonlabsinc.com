@@ -30,6 +30,9 @@
   .card p{margin:0;color:var(--muted);font-size:15px}
   .card .thumb{background:#02081a;border-radius:6px;padding:14px;margin-bottom:14px}
   .card .thumb img{width:110px;max-width:100%;height:auto;display:block;margin:0 auto}
+  a.card{display:block;text-decoration:none;color:inherit;cursor:pointer}
+  a.card:hover{border-color:#9fb6d4;box-shadow:0 4px 16px rgba(18,35,61,.14)}
+  .card .more{display:block;margin-top:10px;font-size:13px;font-weight:600;color:#0b5cad}
   .about p{margin:0 0 14px;max-width:680px}
   .update{border-top:1px solid var(--line);padding:16px 0}
   .update:first-of-type{border-top:none;padding-top:4px}
@@ -85,7 +88,7 @@
     <section>
       <h2>What we build</h2>
       <div class="cards">
-        <div class="card chat-tile">
+        <div class="card chat-tile" id="chatTile">
           <div class="thumb"><img src="vesper.jpg" alt="Vesper"></div>
           <h3>Talk with Vesper</h3>
           <div class="chat-log" id="chatLog">
@@ -100,20 +103,24 @@
             <button id="chatSend" type="button">Send</button>
           </div>
         </div>
-        <div class="card">
+        <a class="card" href="#chatTile">
           <div class="thumb"><img src="vesper.jpg" alt="Vesper"></div>
           <h3>Vesper</h3>
           <p>An AI companion for conversation and game help. In trial on phones today, with her own library and study program. An Xbox version is in development.</p>
-        </div>
-        <div class="card">
+          <span class="more">Talk with Vesper</span>
+        </a>
+        <a class="card" href="research.html#neurocore">
           <div class="thumb"><img src="neurocore.jpg" alt="NeuroCore"></div>
           <h3>NeuroCore</h3>
           <p>Our neuroscience program, studying the signals the brain produces and what they can tell a machine.</p>
-        </div>
-        <div class="card">
-          <h3>Verification tools</h3>
-          <p>AlphaAudit verifies investment performance claims, testing what was said against what the record shows.</p>
-        </div>
+          <span class="more">See the research</span>
+        </a>
+        <a class="card" href="research.html#self-audit">
+          <h3>AlphaAudit</h3>
+          <p>AlphaAudit audits trading track records. Give it a list of trades and it rebuilds the results trade by trade, measures what the fees really cost, compares the record against simply buying and holding, and checks the fills against the market to see whether the trades could have happened at all. Then it gives a verdict: PASS, FAIL, or NOT ENOUGH DATA.</p>
+          <p>Its first public audit took a seller's claimed record of 189 signals and found a $179,000 loss under an 820 percent fee drag. Verdict: FAIL.</p>
+          <span class="more">See the research</span>
+        </a>
         <div>
           <div class="carousel" id="dreamCarousel" oncontextmenu="return false" aria-label="Prints from Andrew's Dream Library">
             <div class="slide on" style="background-image:url('print1.jpg')"></div>
