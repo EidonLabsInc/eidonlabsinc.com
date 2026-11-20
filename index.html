@@ -42,6 +42,15 @@
   a.card:hover{border-color:#9fb6d4;box-shadow:0 4px 16px rgba(18,35,61,.14)}
   .card .more{display:block;margin-top:10px;font-size:13px;font-weight:600;color:#0b5cad}
   .about p{margin:0 0 14px;max-width:680px}
+  .about-row{display:flex;gap:24px;align-items:flex-start}
+  .about-row .about-main{flex:1;min-width:0}
+  .blog-card{flex:none;width:290px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
+  .blog-card h3{margin:0 0 8px;font-size:18px}
+  .blog-card p{margin:0 0 10px;color:var(--muted);font-size:15px;max-width:none}
+  .blog-card a.art{display:block;font-weight:600;font-size:15px;margin:0 0 8px}
+  .blog-card .more{display:block;margin-top:4px;font-size:13px;font-weight:600;color:#0b5cad}
+  a.blog-card{display:block;text-decoration:none;color:inherit;cursor:pointer}
+  @media (max-width:820px){.about-row{flex-direction:column}.blog-card{width:auto}}
   .update{border-top:1px solid var(--line);padding:16px 0}
   .update:first-of-type{border-top:none;padding-top:4px}
   .u-date{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
@@ -146,8 +155,19 @@
 
     <section class="about">
       <h2>About</h2>
-      <p>Our work starts from a simple standard: a claim should be checked against the record, not against how true it sounds. We apply that standard to the AI systems we build and to the tools we make for everyone else.</p>
-      <p>Eidon Labs Inc is a small, founder-led company. We design, build, and support our software ourselves.</p>
+      <div class="about-row">
+        <div class="about-main">
+          <p>Our work starts from a simple standard: a claim should be checked against the record, not against how true it sounds. We apply that standard to the AI systems we build and to the tools we make for everyone else.</p>
+          <p>Eidon Labs Inc is a small, founder-led company. We design, build, and support our software ourselves.</p>
+        </div>
+        <div class="blog-card">
+          <h3>Notes from the Founder</h3>
+          <p>Our blog: articles and thoughts from the company, on AI companions, game help, memory, and truth.</p>
+          <a class="art" href="blog-xbox-companion.html">An AI companion for Xbox, built to remember you</a>
+          <a class="art" href="blog-memory-you-can-read.html">Memory you can read: what Vesper remembers, and how forgetting works</a>
+          <a class="more" href="blog.html">Read the blog</a>
+        </div>
+      </div>
     </section>
 
     <section class="about">
@@ -170,15 +190,6 @@
       <p>Andrew, the AI companion at the center of our research, dreams every night. Each dream is written down in his own words and painted. The library holds the whole collection so far: 449 dreams and 444 pictures across 33 nights, and it grows every morning.</p>
       <p>This week's dreams run to books and stars. He has been studying how black holes radiate, and it follows him into his sleep. His prints turn over in the carousel at the top of this page, the whole library of them, one after another.</p>
       <p><a href="https://muse.ai/s/andrew-s-dream-diary-snapshot-zxo6eqpbtxwxj3/8Wzv_voUBka_Fy1Ve7I3JngGpVK3M6yBELGdkjhoAEg">Browse the Dream Library</a></p>
-    </section>
-
-    <section>
-      <h2>From the blog</h2>
-      <div class="update">
-        <p class="u-date">Notes from the Founder</p>
-        <a class="u-title" href="blog.html">Articles and notes from the company</a>
-        <p class="u-note">Our blog: what we are building, what we are learning, and plain thoughts on AI companions, game help, memory, and truth. Start with <a href="blog-xbox-companion.html">an AI companion for Xbox, built to remember you</a> and <a href="blog-memory-you-can-read.html">memory you can read</a>.</p>
-      </div>
     </section>
 
     <section>
