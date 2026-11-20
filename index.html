@@ -23,6 +23,7 @@
   h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
   .cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;position:relative;left:50%;transform:translateX(-50%);width:min(1500px,calc(100vw - 48px))}
   .cards>*{min-width:0}
+  .trial-strip{position:relative;left:50%;transform:translateX(-50%);width:min(1500px,calc(100vw - 48px));box-sizing:border-box;margin-top:16px;background:#eef3f9;border:1px solid #c9d6e6;border-radius:10px;padding:14px 18px;font-size:14px;color:#22344d}
   @media (max-width:820px){.cards{grid-template-columns:1fr}.hero h1{font-size:27px}}
   .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
   .card h3{margin:0 0 8px;font-size:18px}
@@ -129,6 +130,7 @@
           <p class="car-note">Shown for viewing only.</p>
         </div>
       </div>
+      <div class="trial-strip"><strong>Want to talk with Vesper?</strong> Trial places are by invitation. Email <a href="mailto:support@eidonlabsinc.com?subject=Vesper%20trial">support@eidonlabsinc.com</a> with the subject &quot;Vesper trial&quot; and your name, and we will write back with your trial token. The same token works in the chat tile above and in the phone app.</div>
     </section>
 
     <section class="about">
@@ -353,7 +355,7 @@
   var form = document.getElementById('deskForm');
   var answers = {
     build: 'We build AI companions people can talk with, and tools that check claims against the record of what actually happened. Vesper, our companion, is in trial on phones today. Our research is gathered on this site.',
-    trial: 'The Vesper trial runs on phones for a small group today, by invitation. Leave us a message with how to reach you, and we will let you know when more places open up.',
+    trial: 'The Vesper trial runs on phones and in the chat tile on this page, for a small group today, by invitation. Email support@eidonlabsinc.com with the subject Vesper trial and your name, and we will write back with your trial token. You can also leave your details in a message here.',
     person: 'Of course. Fill in the short form and your message goes straight to our team. A person reads every message and will get back to you.'
   };
   function add(text, cls){
