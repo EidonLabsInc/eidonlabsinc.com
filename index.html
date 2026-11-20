@@ -21,7 +21,8 @@
   .hero p{font-size:17px;color:var(--muted);margin:0;max-width:640px}
   section{padding:36px 0}
   h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
-  .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
+  .cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;position:relative;left:50%;transform:translateX(-50%);width:min(1500px,calc(100vw - 48px))}
+  .cards>*{min-width:0}
   @media (max-width:820px){.cards{grid-template-columns:1fr}.hero h1{font-size:27px}}
   .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
   .card h3{margin:0 0 8px;font-size:18px}
@@ -45,6 +46,7 @@
   .chat-log .m-v{color:#d9f5e3}
   .chat-log .chat-hint{color:#8fae9c}
   .chat-lock,.chat-row{display:flex;gap:8px}
+  .chat-tile [hidden]{display:none!important}
   .chat-lock input,.chat-row input{flex:1;min-width:0;background:#0a141f;border:1px solid #24503a;border-radius:6px;color:#e9f6ee;padding:8px;font-size:13px}
   .chat-lock button,.chat-row button{background:#14532d;color:#eafff2;border:1px solid #2ea35f;border-radius:6px;padding:8px 12px;font-size:13px;cursor:pointer}
   .chat-lock button:hover,.chat-row button:hover{background:#1a6b3c}
@@ -300,6 +302,96 @@
   c.addEventListener('mouseenter', stop);
   c.addEventListener('mouseleave', start);
   start();
+})();
+</script>
+
+<style>
+  .desk-btn{position:fixed;right:18px;bottom:18px;z-index:50;background:#12233d;color:#fff;border:1px solid #2c4a73;border-radius:999px;padding:12px 18px;font-size:14px;cursor:pointer;box-shadow:0 6px 18px rgba(10,20,35,.35)}
+  .desk-btn:hover{background:#1a3157}
+  .desk-panel{position:fixed;right:18px;bottom:72px;z-index:50;width:320px;max-width:calc(100vw - 36px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 40px rgba(10,20,35,.28);overflow:hidden}
+  .desk-head{background:#12233d;color:#fff;padding:12px 16px}
+  .desk-head h3{margin:0;font-size:15px}
+  .desk-head p{margin:2px 0 0;font-size:12px;color:#b9c9de}
+  .desk-log{height:190px;overflow-y:auto;padding:12px 16px;font-size:13px;line-height:1.5}
+  .desk-log p{margin:0 0 8px}
+  .desk-log .d-u{text-align:right;color:#41546e}
+  .desk-log .d-b{color:#1d2733}
+  .desk-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
+  .desk-chips button{background:#eef3f9;border:1px solid #c9d6e6;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer;color:#12233d}
+  .desk-form{padding:0 16px 14px}
+  .desk-form input,.desk-form textarea{width:100%;box-sizing:border-box;border:1px solid #c9d6e6;border-radius:6px;padding:8px;font-size:13px;margin:0 0 8px;font-family:inherit}
+  .desk-form textarea{height:74px;resize:vertical}
+  .desk-form button{background:#12233d;color:#fff;border:0;border-radius:6px;padding:9px 14px;font-size:13px;cursor:pointer;width:100%}
+  .desk-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+</style>
+<div class="desk-panel" id="deskPanel" hidden>
+  <div class="desk-head">
+    <h3>Chat with us</h3>
+    <p>The Eidon Labs front desk. I am a simple bot.</p>
+  </div>
+  <div class="desk-log" id="deskLog">
+    <p class="d-b">Hello. I can answer a few set questions, or take a message for the team. A person reads every message.</p>
+  </div>
+  <div class="desk-chips" id="deskChips">
+    <button type="button" data-q="build">What do you build?</button>
+    <button type="button" data-q="trial">How does the Vesper trial work?</button>
+    <button type="button" data-q="person">I want to talk to a person</button>
+  </div>
+  <div class="desk-form" id="deskForm" hidden>
+    <input type="text" id="deskName" placeholder="Your name" aria-label="Your name">
+    <input type="text" id="deskContact" placeholder="Email or phone, so we can reply" aria-label="Email or phone">
+    <textarea id="deskMsg" placeholder="Your message" aria-label="Your message"></textarea>
+    <span class="desk-hp"><input type="text" id="deskCompany" tabindex="-1" autocomplete="off" aria-hidden="true"></span>
+    <button type="button" id="deskSend">Send message</button>
+  </div>
+</div>
+<button class="desk-btn" id="deskBtn" type="button">Chat with us</button>
+<script>
+(function(){
+  var panel = document.getElementById('deskPanel');
+  var log = document.getElementById('deskLog');
+  var form = document.getElementById('deskForm');
+  var answers = {
+    build: 'We build AI companions people can talk with, and tools that check claims against the record of what actually happened. Vesper, our companion, is in trial on phones today. Our research is gathered on this site.',
+    trial: 'The Vesper trial runs on phones for a small group today, by invitation. Leave us a message with how to reach you, and we will let you know when more places open up.',
+    person: 'Of course. Fill in the short form and your message goes straight to our team. A person reads every message and will get back to you.'
+  };
+  function add(text, cls){
+    var p = document.createElement('p');
+    p.className = cls;
+    p.textContent = text;
+    log.appendChild(p);
+    log.scrollTop = log.scrollHeight;
+  }
+  document.getElementById('deskBtn').addEventListener('click', function(){
+    panel.hidden = !panel.hidden;
+  });
+  document.getElementById('deskChips').addEventListener('click', function(e){
+    var b = e.target.closest('button');
+    if(!b) return;
+    var q = b.getAttribute('data-q');
+    add(b.textContent, 'd-u');
+    add(answers[q], 'd-b');
+    if(q === 'person'){ form.hidden = false; }
+  });
+  document.getElementById('deskSend').addEventListener('click', function(){
+    var name = document.getElementById('deskName').value.trim();
+    var contact = document.getElementById('deskContact').value.trim();
+    var msg = document.getElementById('deskMsg').value.trim();
+    if(!name || !contact || !msg){ add('Please fill in your name, how to reach you, and your message.', 'd-b'); return; }
+    var btn = this;
+    btn.disabled = true;
+    fetch('https://vesper-eidon-labs.fly.dev/contact', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name: name, contact: contact, message: msg, company: document.getElementById('deskCompany').value})
+    }).then(function(r){
+      if(r.ok){ add('Thank you. Your message is on its way to our team.', 'd-b'); form.hidden = true; }
+      else { add('That did not go through. You can also email support@eidonlabsinc.com.', 'd-b'); }
+    }).catch(function(){
+      add('That did not go through. You can also email support@eidonlabsinc.com.', 'd-b');
+    }).then(function(){ btn.disabled = false; });
+  });
 })();
 </script>
 </body>
