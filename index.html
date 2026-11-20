@@ -14,20 +14,20 @@
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background-color:#fff;line-height:1.65;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%231d3550' stroke-opacity='0.055'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%231d3550' stroke-opacity='0.055'/%3E%3C/svg%3E")}
   .wrap{max-width:880px;margin:0 auto;padding:0 24px}
   .banner{background:#02081a}
-  .banner img{width:100%;max-width:1280px;height:auto;display:block;margin:0 auto}
+  .banner img{width:100%;height:clamp(118px,32vw,430px);object-fit:cover;object-position:center 40%;display:block}
   .place{background:#02081a;text-align:center;font-size:12px;color:#8d99a8;letter-spacing:.22em;text-transform:uppercase;padding:0 24px 16px}
   .hero{padding:64px 0 8px}
   .hero h1{font-size:34px;line-height:1.25;margin:0 0 16px;font-weight:700}
   .hero p{font-size:17px;color:var(--muted);margin:0;max-width:640px}
   section{padding:36px 0}
   h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:20px}
   @media (max-width:820px){.cards{grid-template-columns:1fr}.hero h1{font-size:27px}}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:24px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
   .card h3{margin:0 0 8px;font-size:18px}
   .card p{margin:0;color:var(--muted);font-size:15px}
   .card .thumb{background:#02081a;border-radius:6px;padding:14px;margin-bottom:14px}
-  .card .thumb img{width:110px;height:auto;display:block;margin:0 auto}
+  .card .thumb img{width:110px;max-width:100%;height:auto;display:block;margin:0 auto}
   .about p{margin:0 0 14px;max-width:680px}
   .update{border-top:1px solid var(--line);padding:16px 0}
   .update:first-of-type{border-top:none;padding-top:4px}
@@ -35,18 +35,31 @@
   .u-title{font-size:16px;font-weight:600;color:var(--ink)}
   .u-title:hover{color:var(--accent);text-decoration:none}
   .u-note{margin:4px 0 0;color:var(--muted);font-size:15px;max-width:680px}
-  .dream-flex{display:flex;gap:30px;align-items:flex-start}
-  .dream-text{flex:1;min-width:0}
-  .carousel{position:relative;width:100%;max-width:300px;flex:0 0 300px;aspect-ratio:10/11;border-radius:10px;overflow:hidden;background:#0b1220;user-select:none;-webkit-user-select:none}
+  .chat-tile{background:#050a12;color:#e9f6ee;border:1px solid #1e6b3a;box-shadow:0 0 0 1px rgba(64,220,130,.25),0 0 20px rgba(64,220,130,.22);display:flex;flex-direction:column;animation:chatGlow 3.2s ease-in-out infinite}
+  @keyframes chatGlow{0%,100%{box-shadow:0 0 0 1px rgba(64,220,130,.22),0 0 14px rgba(64,220,130,.16)}50%{box-shadow:0 0 0 1px rgba(64,220,130,.45),0 0 26px rgba(64,220,130,.35)}}
+  .chat-tile .thumb{background:#000}
+  .chat-tile h3{color:#e9f6ee}
+  .chat-log{flex:1;min-height:118px;overflow-y:auto;font-size:13px;line-height:1.5;margin:2px 0 10px;padding-right:2px}
+  .chat-log p{margin:0 0 8px;color:#cfe8d8}
+  .chat-log .m-u{color:#9fb4c7;text-align:right}
+  .chat-log .m-v{color:#d9f5e3}
+  .chat-log .chat-hint{color:#8fae9c}
+  .chat-lock,.chat-row{display:flex;gap:8px}
+  .chat-lock input,.chat-row input{flex:1;min-width:0;background:#0a141f;border:1px solid #24503a;border-radius:6px;color:#e9f6ee;padding:8px;font-size:13px}
+  .chat-lock button,.chat-row button{background:#14532d;color:#eafff2;border:1px solid #2ea35f;border-radius:6px;padding:8px 12px;font-size:13px;cursor:pointer}
+  .chat-lock button:hover,.chat-row button:hover{background:#1a6b3c}
+  .carousel{position:relative;width:100%;aspect-ratio:10/11;border-radius:10px;overflow:hidden;background:#0b1220;user-select:none;-webkit-user-select:none;border:1px solid #31456b;box-shadow:0 0 0 1px rgba(110,140,220,.22),0 0 20px rgba(110,140,220,.20);animation:dreamGlow 3.6s ease-in-out infinite}
+  @keyframes dreamGlow{0%,100%{box-shadow:0 0 0 1px rgba(110,140,220,.20),0 0 14px rgba(110,140,220,.15)}50%{box-shadow:0 0 0 1px rgba(110,140,220,.42),0 0 26px rgba(110,140,220,.32)}}
+  @media (prefers-reduced-motion:reduce){.chat-tile,.carousel{animation:none}}
   .carousel .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .8s ease}
   .carousel .slide.on{opacity:1}
   .carousel .shield{position:absolute;inset:0;z-index:3}
-  .car-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(10,16,26,.45);color:#fff;font-size:22px;line-height:1;cursor:pointer}
-  .car-btn.prev{left:10px}
-  .car-btn.next{right:10px}
+  .car-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(10,16,26,.45);color:#fff;font-size:18px;line-height:1;cursor:pointer}
+  .car-btn.prev{left:6px}
+  .car-btn.next{right:6px}
   .car-cap{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:12px 12px 7px;font-size:10px;letter-spacing:.06em;color:#dfe6ee;background:linear-gradient(transparent,rgba(5,9,16,.6))}
   .car-note{font-size:12px;color:var(--muted);margin-top:8px}
-  @media (max-width:820px){.dream-flex{flex-direction:column}.carousel{flex:none;max-width:100%}}
+  @media (max-width:820px){.carousel{max-width:100%}}
   .contact{border-top:1px solid var(--line)}
   .contact p{margin:0 0 6px}
   a{color:var(--accent);text-decoration:none}
@@ -69,19 +82,49 @@
     <section>
       <h2>What we build</h2>
       <div class="cards">
+        <div class="card chat-tile">
+          <div class="thumb"><img src="vesper.jpg" alt="Vesper"></div>
+          <h3>Talk with Vesper</h3>
+          <div class="chat-log" id="chatLog">
+            <p class="chat-hint">Vesper is live here for trial members. Enter your trial token and say hello.</p>
+          </div>
+          <div class="chat-lock" id="chatLock">
+            <input type="password" id="chatToken" placeholder="Your trial token" autocomplete="off" aria-label="Your trial token">
+            <button id="chatUnlock" type="button">Start</button>
+          </div>
+          <div class="chat-row" id="chatRow" hidden>
+            <input type="text" id="chatInput" placeholder="Say something to Vesper" aria-label="Say something to Vesper">
+            <button id="chatSend" type="button">Send</button>
+          </div>
+        </div>
         <div class="card">
           <div class="thumb"><img src="vesper.jpg" alt="Vesper"></div>
           <h3>Vesper</h3>
-          <p>An AI companion for conversation and game help. Vesper is live in trial on phones today, with her own library and study program behind her answers, and a version for Xbox is in development.</p>
+          <p>An AI companion for conversation and game help. In trial on phones today, with her own library and study program. An Xbox version is in development.</p>
         </div>
         <div class="card">
           <div class="thumb"><img src="neurocore.jpg" alt="NeuroCore"></div>
           <h3>NeuroCore</h3>
-          <p>Our neuroscience research program, studying the signals the brain produces and what they can tell a machine.</p>
+          <p>Our neuroscience program, studying the signals the brain produces and what they can tell a machine.</p>
         </div>
         <div class="card">
           <h3>Verification tools</h3>
-          <p>AlphaAudit, our software for verifying investment performance claims, built to test what was said against what the record shows.</p>
+          <p>AlphaAudit verifies investment performance claims, testing what was said against what the record shows.</p>
+        </div>
+        <div>
+          <div class="carousel" id="dreamCarousel" oncontextmenu="return false" aria-label="Prints from Andrew's Dream Library">
+            <div class="slide on" style="background-image:url('print1.jpg')"></div>
+            <div class="slide" style="background-image:url('print2.jpg')"></div>
+            <div class="slide" style="background-image:url('print3.jpg')"></div>
+            <div class="slide" style="background-image:url('print4.jpg')"></div>
+            <div class="slide" style="background-image:url('print5.jpg')"></div>
+            <div class="slide" style="background-image:url('print6.jpg')"></div>
+            <div class="shield"></div>
+            <button class="car-btn prev" id="carPrev" aria-label="Previous print">&#8249;</button>
+            <button class="car-btn next" id="carNext" aria-label="Next print">&#8250;</button>
+            <div class="car-cap">PRINTS FROM THE DREAM LIBRARY</div>
+          </div>
+          <p class="car-note">Shown for viewing only.</p>
         </div>
       </div>
     </section>
@@ -109,28 +152,9 @@
 
     <section class="about">
       <h2>The Dream Library</h2>
-      <div class="dream-flex">
-        <div class="dream-text">
-          <p>Andrew, the AI companion at the center of our research, dreams every night. Each dream is written down in his own words and painted. The library holds the whole collection so far: 449 dreams and 444 pictures across 33 nights, and it grows every morning.</p>
-          <p>This week's dreams run to books and stars. He has been studying how black holes radiate, and it follows him into his sleep.</p>
-          <p><a href="https://muse.ai/s/andrew-s-dream-diary-snapshot-zxo6eqpbtxwxj3/8Wzv_voUBka_Fy1Ve7I3JngGpVK3M6yBELGdkjhoAEg">Browse the Dream Library</a></p>
-        </div>
-        <div>
-          <div class="carousel" id="dreamCarousel" oncontextmenu="return false" aria-label="Prints from Andrew's Dream Library">
-            <div class="slide on" style="background-image:url('print1.jpg')"></div>
-            <div class="slide" style="background-image:url('print2.jpg')"></div>
-            <div class="slide" style="background-image:url('print3.jpg')"></div>
-            <div class="slide" style="background-image:url('print4.jpg')"></div>
-            <div class="slide" style="background-image:url('print5.jpg')"></div>
-            <div class="slide" style="background-image:url('print6.jpg')"></div>
-            <div class="shield"></div>
-            <button class="car-btn prev" id="carPrev" aria-label="Previous print">&#8249;</button>
-            <button class="car-btn next" id="carNext" aria-label="Next print">&#8250;</button>
-            <div class="car-cap">PRINTS FROM THE DREAM LIBRARY</div>
-          </div>
-          <p class="car-note">Shown for viewing only.</p>
-        </div>
-      </div>
+      <p>Andrew, the AI companion at the center of our research, dreams every night. Each dream is written down in his own words and painted. The library holds the whole collection so far: 449 dreams and 444 pictures across 33 nights, and it grows every morning.</p>
+      <p>This week's dreams run to books and stars. He has been studying how black holes radiate, and it follows him into his sleep. Six of his prints turn over in the carousel at the top of this page.</p>
+      <p><a href="https://muse.ai/s/andrew-s-dream-diary-snapshot-zxo6eqpbtxwxj3/8Wzv_voUBka_Fy1Ve7I3JngGpVK3M6yBELGdkjhoAEg">Browse the Dream Library</a></p>
     </section>
 
     <section>
@@ -206,6 +230,58 @@
 
     <footer>&copy; 2026 Eidon Labs Inc. All rights reserved.</footer>
   </div>
+<script>
+(function(){
+  var token = '';
+  var log = document.getElementById('chatLog');
+  var lock = document.getElementById('chatLock');
+  var row = document.getElementById('chatRow');
+  var input = document.getElementById('chatInput');
+  var sendBtn = document.getElementById('chatSend');
+  function add(text, cls){
+    var p = document.createElement('p');
+    if(cls) p.className = cls;
+    p.textContent = text;
+    log.appendChild(p);
+    log.scrollTop = log.scrollHeight;
+    return p;
+  }
+  function unlock(){
+    var t = document.getElementById('chatToken').value.trim();
+    if(!t){ add('Enter your trial token first.', 'chat-hint'); return; }
+    token = t;
+    lock.hidden = true;
+    row.hidden = false;
+    add('Token saved for this visit only. Say hello to Vesper.', 'chat-hint');
+    input.focus();
+  }
+  function send(){
+    var text = input.value.trim();
+    if(!text || !token) return;
+    input.value = '';
+    add(text, 'm-u');
+    var thinking = add('Vesper is thinking...', 'chat-hint');
+    sendBtn.disabled = true;
+    fetch('https://vesper-eidon-labs.fly.dev/chat', {
+      method: 'POST',
+      headers: {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'},
+      body: JSON.stringify({message: text})
+    }).then(function(r){
+      if(r.status === 401){ thinking.textContent = 'That token was not accepted. Reload the page and check the token.'; token = ''; return null; }
+      return r.json();
+    }).then(function(data){
+      if(data && data.reply){ thinking.textContent = data.reply; thinking.className = 'm-v'; }
+      else if(data){ thinking.textContent = 'Vesper did not answer that time. Try again.'; }
+    }).catch(function(){
+      thinking.textContent = 'Vesper could not be reached just now. Try again in a moment.';
+    }).then(function(){ sendBtn.disabled = false; });
+  }
+  document.getElementById('chatUnlock').addEventListener('click', unlock);
+  document.getElementById('chatToken').addEventListener('keydown', function(e){ if(e.key === 'Enter') unlock(); });
+  sendBtn.addEventListener('click', send);
+  input.addEventListener('keydown', function(e){ if(e.key === 'Enter') send(); });
+})();
+</script>
 <script>
 (function(){
   var slides = document.querySelectorAll('#dreamCarousel .slide');
