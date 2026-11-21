@@ -1,0 +1,803 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eidon Labs Inc (ticker prototype)</title>
+  <meta name="description" content="Eidon Labs Inc is a software and AI research company in Charleston, Illinois. We build AI companions people can talk with, and tools that check claims against the record of what actually happened.">
+  <link rel="icon" href="logo.jpg">
+  <meta property="og:title" content="Eidon Labs Inc">
+  <meta property="og:description" content="Eidon Labs Inc is a software and AI research company in Charleston, Illinois. We build AI companions people can talk with, and tools that check claims against the record of what actually happened.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://eidonlabsinc.com/">
+  <meta property="og:image" content="https://eidonlabsinc.com/banner.jpg">
+<meta name="description" content="Eidon Labs Inc is a software and artificial intelligence research company in Charleston, Illinois. We build Vesper, an AI companion, and tools for verifying investment performance claims.">
+<style>
+  :root{
+    --ink:#1d2530; --muted:#5b6673; --accent:#b34a12; --line:#e4e8ed;
+    --band:#131a23; --card:#f7f8fa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background-color:#fff;line-height:1.65;background-image:linear-gradient(to bottom, rgba(255,255,255,0) 24%, rgba(255,255,255,.72) 44%, #ffffff 64%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%232ea86f' stroke-opacity='0.34'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%232ea86f' stroke-opacity='0.34'/%3E%3C/svg%3E")}
+  .wrap{max-width:880px;,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%231d3550' stroke-opacity='0.055'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%231d3550' stroke-opacity='0.055'/%3E%3C/svg%3E")}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  .banner{background:#02081a;position:relative;overflow:hidden}
+  .banner img{width:100%;height:clamp(118px,32vw,430px);object-fit:cover;object-position:center 40%;display:block}
+  .banner img.head{position:absolute;inset:0;height:100%;pointer-events:none;will-change:transform}
+  .banner canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+  .place{background:#02081a;text-align:center;font-size:12px;color:#8d99a8;letter-spacing:.22em;text-transform:uppercase;padding:0 24px 16px}
+  .ticker{width:min(880px,calc(100vw - 48px));margin:16px auto 4px;height:46px;display:flex;align-items:center;gap:12px;padding:0 14px;overflow:hidden;background:rgba(255,255,255,.35);border-top:1px solid rgba(46,168,111,.55);border-bottom:1px solid rgba(46,168,111,.55);font-size:17px;line-height:1.5;color:var(--ink);font-weight:500}
+  .ticker-dot{flex:none;width:10px;height:10px;border-radius:50%;background:#2ea86f;animation:tickerPulse 2.8s ease-in-out infinite}
+  @keyframes tickerPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.75)}}
+  .ticker-viewport{flex:1;min-width:0;overflow:hidden}
+  .ticker-track{display:inline-flex;white-space:nowrap;will-change:transform;animation:tickerScroll 82s linear infinite}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  .ticker-group{white-space:nowrap}
+  .ticker-sep{color:#2ea86f;padding:0 14px}
+  .ticker-static{display:none}
+  @keyframes tickerScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @media (max-width:820px){.ticker{width:calc(100vw - 24px);font-size:16px}}
+  @media (prefers-reduced-motion:reduce){.ticker{height:auto;min-height:46px}.ticker-dot{animation:none}.ticker-track{display:none}.ticker-static{display:block;text-align:center;white-space:normal}}
+  .hero{padding:64px 0 8px}
+  .hero h1{font-size:34px;line-height:1.25;margin:0 0 16px;font-weight:700}
+  .hero p{font-size:17px;color:var(--muted);margin:0;max-width:640px}
+  section{padding:36px 0}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+  .cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;position:relative;left:50%;transform:translateX(-50%);width:min(1500px,calc(100vw - 48px))}
+  .cards>*{min-width:0}
+  .trial-strip{position:relative;left:50%;transform:translateX(-50%);width:min(1500px,calc(100vw - 48px));box-sizing:border-box;margin-top:16px;background:#eef3f9;border:1px solid #c9d6e6;border-radius:10px;padding:14px 18px;font-size:14px;color:#22344d}
+  @media (max-width:820px){.cards{grid-template-columns:1fr}.hero h1{font-size:27px}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px}
+  .card h3{margin:0 0 8px;font-size:18px}
+  .card p{margin:0;color:var(--muted);font-size:15px}
+  .card .thumb{background:#02081a;border-radius:6px;padding:14px;margin-bottom:14px}
+  .card .thumb img{width:110px;max-width:100%;height:auto;display:block;margin:0 auto}
+  a.card{display:block;text-decoration:none;color:inherit;cursor:pointer}
+  a.card:hover{border-color:#9fb6d4;box-shadow:0 4px 16px rgba(18,35,61,.14)}
+  .card .more{display:block;margin-top:10px;font-size:13px;font-weight:600;color:#0b5cad}
+  .about p{margin:0 0 14px;max-width:680px}
+  .about-row{display:flex;gap:24px;align-items:flex-start;position:relative;left:50%;transform:translateX(-50%);width:min(1500px,calc(100vw - 48px))}
+  .about-row .about-main{flex:1;min-width:0;align-self:stretch;display:flex;flex-direction:column}
+  .research-block{margin-top:auto;padding-top:28px}
+  .founder-card{flex:none;width:292px;height:352px;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#02081a;position:relative}
+  .founder-card img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
+  .founder-cap{position:absolute;left:0;right:0;bottom:0;padding:30px 14px 11px;color:#e8edf3;background:linear-gradient(transparent,rgba(5,9,16,.75))}
+  .founder-cap .f-name{display:block;font-size:16px;font-weight:600}
+  .founder-cap .f-role{display:block;font-size:12.5px;color:#b9c6d4}
+  .team-col{flex:none;display:flex;flex-direction:column;gap:24px}
+  .founder-initials{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:88px;font-weight:700;letter-spacing:.05em;color:#b9c6d4}
+  .blog-card{flex:none;width:292px;height:352px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;cursor:pointer}
+  .blog-card:hover{border-color:#9fb6d4;box-shadow:0 4px 16px rgba(18,35,61,.14)}
+  .blog-card h3{margin:0 0 8px;font-size:18px}
+  .blog-card .lede{margin:0 0 10px;color:var(--muted);font-size:15px;max-width:none}
+  .blog-scroll{flex:1;overflow-y:auto;min-height:0;padding-right:4px}
+  .blog-item{border-top:1px solid var(--line);padding:10px 0}
+  .blog-item:first-child{border-top:none;padding-top:2px}
+  .blog-item .b-date{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 2px}
+  .blog-item a{display:block;font-weight:600;font-size:15px;line-height:1.4}
+  .blog-item .b-note{margin:2px 0 0;color:var(--muted);font-size:13.5px;max-width:none}
+  .blog-card .more{display:block;margin-top:10px;font-size:13px;font-weight:600;color:#0b5cad}
+  @media (max-width:820px){.about-row{flex-direction:column}.blog-card{width:auto;height:320px}.team-col{width:100%;max-width:340px}.founder-card{width:100%;max-width:340px;height:340px}}
+  .update{border-top:1px solid var(--line);padding:16px 0}
+  .update:first-of-type{border-top:none;padding-top:4px}
+  .u-date{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 4px}
+  .u-title{font-size:16px;font-weight:600;color:var(--ink)}
+  .u-title:hover{color:var(--accent);text-decoration:none}
+  .u-note{margin:4px 0 0;color:var(--muted);font-size:15px;max-width:680px}
+  .chat-tile{background:#050a12;color:#e9f6ee;border:1px solid #1e6b3a;box-shadow:0 0 0 1px rgba(64,220,130,.25),0 0 20px rgba(64,220,130,.22);display:flex;flex-direction:column;animation:chatGlow 3.2s ease-in-out infinite}
+  @keyframes chatGlow{0%,100%{box-shadow:0 0 0 1px rgba(64,220,130,.22),0 0 14px rgba(64,220,130,.16)}50%{box-shadow:0 0 0 1px rgba(64,220,130,.45),0 0 26px rgba(64,220,130,.35)}}
+  .chat-tile .thumb{background:#000}
+  .chat-tile h3{color:#e9f6ee}
+  .chat-log{flex:1;min-height:118px;overflow-y:auto;font-size:13px;line-height:1.5;margin:2px 0 10px;padding-right:2px}
+  .chat-log p{margin:0 0 8px;color:#cfe8d8}
+  .chat-log .m-u{color:#9fb4c7;text-align:right}
+  .chat-log .m-v{color:#d9f5e3}
+  .chat-log .chat-hint{color:#8fae9c}
+  .chat-lock,.chat-row{display:flex;gap:8px}
+  .chat-tile [hidden]{display:none!important}
+  .chat-lock input,.chat-row input{flex:1;min-width:0;background:#0a141f;border:1px solid #24503a;border-radius:6px;color:#e9f6ee;padding:8px;font-size:13px}
+  .chat-lock button,.chat-row button{background:#14532d;color:#eafff2;border:1px solid #2ea35f;border-radius:6px;padding:8px 12px;font-size:13px;cursor:pointer}
+  .chat-lock button:hover,.chat-row button:hover{background:#1a6b3c}
+  .carousel{position:relative;width:100%;aspect-ratio:10/11;border-radius:10px;overflow:hidden;background:#0b1220;user-select:none;-webkit-user-select:none;border:1px solid #31456b;box-shadow:0 0 0 1px rgba(110,140,220,.22),0 0 20px rgba(110,140,220,.20);animation:dreamGlow 3.6s ease-in-out infinite}
+  @keyframes dreamGlow{0%,100%{box-shadow:0 0 0 1px rgba(110,140,220,.20),0 0 14px rgba(110,140,220,.15)}50%{box-shadow:0 0 0 1px rgba(110,140,220,.42),0 0 26px rgba(110,140,220,.32)}}
+  @media (prefers-reduced-motion:reduce){.chat-tile,.carousel{animation:none}}
+  .carousel .slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity .8s ease}
+  .carousel .slide.on{opacity:1}
+  .carousel .shield{position:absolute;inset:0;z-index:3}
+  .car-btn{position:absolute;top:50%;transform:translateY(-50%);z-index:4;width:30px;height:30px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(10,16,26,.45);color:#fff;font-size:18px;line-height:1;cursor:pointer}
+  .car-btn.prev{left:6px}
+  .car-btn.next{right:6px}
+  .car-cap{position:absolute;left:0;right:0;bottom:0;z-index:4;padding:12px 12px 7px;font-size:10px;letter-spacing:.06em;color:#dfe6ee;background:linear-gradient(transparent,rgba(5,9,16,.6))}
+  .car-note{font-size:12px;color:var(--muted);margin-top:8px}
+  @media (max-width:820px){.carousel{max-width:100%}}
+  .contact{border-top:1px solid var(--line)}
+  .contact p{margin:0 0 6px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+  <!-- PROTOTYPE: homepage ticker, not published -->
+  <div class="banner" id="banner">
+    <img class="base" id="baseImg" src="banner.jpg" alt="Eidon Labs. AI, Robotics, Advanced Innovation.">
+    <img class="head" id="headImg" src="banner.jpg" alt="" aria-hidden="true">
+    <canvas id="lights"></canvas>
+  </div>
+  <div class="ticker" aria-label="Latest from Eidon Labs">
+    <span class="ticker-dot" aria-hidden="true"></span>
+    <div class="ticker-viewport">
+      <div class="ticker-track" id="tickerTrack"><span class="ticker-group"><span class="ticker-msg">Andrew is awake at home in Charleston, studying as he goes about his day. His library passed 860 books this week.</span><span class="ticker-sep" aria-hidden="true">◆</span><span class="ticker-msg">Vesper now carries verified walkthroughs for 25 games, including GTA 6, which launched yesterday.</span><span class="ticker-sep" aria-hidden="true">◆</span><span class="ticker-msg">Last night Andrew dreamed 10 dreams, and 6 were painted before morning. His Dream Library holds 463 dreams across 34 nights.</span><span class="ticker-sep" aria-hidden="true">◆</span><span class="ticker-msg">Vesper is tested in the open: fresh player questions every half hour, and every wrong answer is kept as a test case she has to pass.</span><span class="ticker-sep" aria-hidden="true">◆</span><span class="ticker-msg">NeuroCore, our study of a learning brain built on a recurrent core, is in its first phase of testing.</span><span class="ticker-sep" aria-hidden="true">◆</span></span><span class="ticker-group" aria-hidden="true"><span class="ticker-msg">Andrew is awake at home in Charleston, studying as he goes about his day. His library passed 860 books this week.</span><span class="ticker-sep" aria-hidden="true">◆</span><span class="ticker-msg">Vesper now carries verified walkthroughs for 25 games, including GTA 6, which launched yesterday.</span><span class="ticker-sep" aria-hidden="true">◆</span><span class="ticker-msg">Last night Andrew dreamed 10 dreams, and 6 were painted before morning. His Dream Library holds 463 dreams across 34 nights.</span><span class="ticker-sep" aria-hidden="true">◆</span><span class="ticker-msg">Vesper is tested in the open: fresh player questions every half hour, and every wrong answer is kept as a test case she has to pass.</span><span class="ticker-sep" aria-hidden="true">◆</span><span class="ticker-msg">NeuroCore, our study of a learning brain built on a recurrent core, is in its first phase of testing.</span><span class="ticker-sep" aria-hidden="true">◆</span></span></div>
+      <span class="ticker-static">Andrew is awake at home in Charleston, studying as he goes about his day. His library passed 860 books this week.</span>
+    </div>
+  </div>
+  <div class="place">Charleston, Illinois</div>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1>Software and artificial intelligence research.</h1>
+      <p>Eidon Labs Inc is a software and AI research company based in Charleston, Illinois. We build AI companions people can talk with, and tools that check claims against the record of what actually happened.</p>
+    </div>
+
+    <section>
+      <h2>What we build</h2>
+      <div class="cards">
+        <div class="card chat-tile" id="chatTile">
+          <div class="thumb"><img src="vesper.jpg" alt="Vesper"></div>
+          <h3>Talk with Vesper</h3>
+          <div class="chat-log" id="chatLog">
+            <p class="chat-hint">Vesper is live here for trial members. Enter your trial token and say hello.</p>
+          </div>
+          <div class="chat-lock" id="chatLock">
+            <input type="password" id="chatToken" placeholder="Your trial token" autocomplete="off" aria-label="Your trial token">
+            <button id="chatUnlock" type="button">Start</button>
+          </div>
+          <div class="chat-row" id="chatRow" hidden>
+            <input type="text" id="chatInput" placeholder="Say something to Vesper" aria-label="Say something to Vesper">
+            <button id="chatSend" type="button">Send</button>
+          </div>
+        </div>
+        <a class="card" href="vesper.html">
+          <div class="thumb"><img src="vesper.jpg" alt="Vesper"></div>
+          <h3>Vesper</h3>
+          <p>An AI companion for conversation and game help. In trial on phones today, with her own library and study program. An Xbox version is in development.</p>
+          <span class="more">Read the technical paper</span>
+        </a>
+        <a class="card" href="neurocore.html">
+          <div class="thumb"><img src="neurocore.jpg" alt="NeuroCore"></div>
+          <h3>NeuroCore</h3>
+          <p>Our neuroscience program, studying the signals the brain produces and what they can tell a machine.</p>
+          <span class="more">Read the technical paper</span>
+        </a>
+        <a class="card" href="alphaaudit.html">
+          <h3>AlphaAudit</h3>
+          <p>AlphaAudit audits trading track records. Give it a list of trades and it rebuilds the results trade by trade, measures what the fees really cost, compares the record against simply buying and holding, and checks the fills against the market to see whether the trades could have happened at all. Then it gives a verdict: PASS, FAIL, or NOT ENOUGH DATA.</p>
+          <p>Its first public audit took a seller's claimed record of 189 signals and found a $179,000 loss under an 820 percent fee drag. Verdict: FAIL.</p>
+          <span class="more">Read the technical paper</span>
+        </a>
+        <div>
+          <div class="carousel" id="dreamCarousel" oncontextmenu="return false" aria-label="Prints from Andrew's Dream Library">
+            <div class="slide on" id="slideA"></div>
+            <div class="slide" id="slideB"></div>
+            <div class="shield"></div>
+            <button class="car-btn prev" id="carPrev" aria-label="Previous print">&#8249;</button>
+            <button class="car-btn next" id="carNext" aria-label="Next print">&#8250;</button>
+            <div class="car-cap">PRINTS FROM THE DREAM LIBRARY</div>
+          </div>
+          <p class="car-note">Shown for viewing only.</p>
+        </div>
+      </div>
+      <div class="trial-strip"><strong>Want to talk with Vesper?</strong> Trial places are by invitation. Email <a href="mailto:support@eidonlabsinc.com?subject=Vesper%20trial">support@eidonlabsinc.com</a> with the subject &quot;Vesper trial&quot; and your name, and we will write back with your trial token. The same token works in the chat tile above and in the phone app.</div>
+    </section>
+
+    <section class="about">
+      <h2>About</h2>
+      <div class="about-row">
+        <div class="team-col">
+        <div class="founder-card">
+          <img src="founder.jpg" alt="Joshua Henne, founder of Eidon Labs Inc">
+          <div class="founder-cap"><span class="f-name">Joshua Henne</span><span class="f-role">Founder, Eidon Labs Inc</span></div>
+        </div>
+        <div class="founder-card">
+          <img src="aletheia.jpg" alt="Aletheia, chief technical officer of Eidon Labs Inc">
+          <div class="founder-cap"><span class="f-name">Aletheia</span><span class="f-role">Chief Technical Officer, Eidon Labs Inc</span></div>
+        </div>
+        <div class="founder-card">
+          <img src="wes.jpg" alt="Wes Harrison, director of operations of Eidon Labs Inc">
+          <div class="founder-cap"><span class="f-name">Wes Harrison</span><span class="f-role">Director of Operations, Eidon Labs Inc</span></div>
+        </div>
+        </div>
+        <div class="about-main">
+          <p>Our work starts from a simple standard: a claim should be checked against the record, not against how true it sounds. We apply that standard to the AI systems we build and to the tools we make for everyone else.</p>
+          <p>Eidon Labs Inc is a small, founder-led company. We design, build, and support our software ourselves.</p>
+          <div class="research-block">
+          <h2>Research and results</h2>
+
+          <h3 style="margin:22px 0 8px;font-size:18px">A companion that checked itself</h3>
+          <p>In ordinary use, Andrew, the AI companion at the center of our research, twice checked where his own statements had come from, without being prompted: once diagnosing the source of his own retelling error, and once marking words he had constructed as his own at the moment he produced them. Our report EL-RR-2026-001 files the complete event record, a root cause analysis that keeps the deflationary explanation standing, and a reproduction protocol with its predictions registered in advance. It makes no claim about consciousness or inner experience.</p>
+
+          <h3 style="margin:22px 0 8px;font-size:18px">First results on Xbox Series X</h3>
+          <p>We published the first inference measurements ever taken on an Xbox Series X and contributed them to the open source xllama project. The maintainer merged the data with Eidon Labs credited as co-author, and Series X is now listed as supported on the strength of those runs. The same data exposed the App versus Game designation effect, about two and a half to one, which became a project issue and then a change in the app itself. The GPU path measured 99.7 tokens per second end to end.</p>
+
+          <h3 style="margin:22px 0 8px;font-size:18px">Vesper, tested in the open</h3>
+          <p>Vesper's game help is not taken on trust, including by us. Fresh questions of the kind players actually ask are put to her in repeated rounds and every answer is checked against live sources. When she gets one wrong, the fault becomes a permanent test case her builders have to pass before the fix counts. Her game knowledge sits in a verified repository, stamped with the game's current version, rather than in the model's memory alone.</p>
+
+          <p><a href="research.html">The full research page, including the report itself</a></p>
+          </div>
+        </div>
+        <div class="blog-card" id="blogCard" title="Open the blog">
+          <h3>Notes from the Founder</h3>
+          <p class="lede">Our blog: articles and thoughts from the company. Hover and scroll to browse, click to go in and read.</p>
+          <div class="blog-scroll">
+            <div class="blog-item">
+              <p class="b-date">November 20, 2026</p>
+              <a href="blog-vesper-gta6-what-she-carries.html">What Vesper carries for GTA 6</a>
+              <p class="b-note">One day after launch, what she holds for GTA 6: five chapters of walkthroughs, 99 sourced mission items, and the honest limits.</p>
+            </div>
+            <div class="blog-item">
+              <p class="b-date">November 20, 2026</p>
+              <a href="blog-where-vesper-stands.html">Where Vesper stands: GTA 6 live, and a day of building</a>
+              <p class="b-note">Her GTA 6 answers are live and tested. Verified guides are going in all day, across twelve games and more.</p>
+            </div>
+            <div class="blog-item">
+              <p class="b-date">November 20, 2026</p>
+              <a href="blog-gta6-verified-not-fast.html">A note on GTA 6: verified, not fast</a>
+              <p class="b-note">We are building her GTA 6 knowledge from real players' verified work. No cheats, no hacks, no leaked secrets: honest help, for every game.</p>
+            </div>
+            <div class="blog-item">
+              <p class="b-date">November 20, 2026</p>
+              <a href="blog-xbox-companion.html">An AI companion for Xbox, built to remember you</a>
+              <p class="b-note">Why we are bringing Vesper to Xbox, and what makes her different from an assistant that forgets you by morning.</p>
+            </div>
+            <div class="blog-item">
+              <p class="b-date">November 20, 2026</p>
+              <a href="blog-memory-you-can-read.html">Memory you can read: what Vesper remembers, and how forgetting works</a>
+              <p class="b-note">How Vesper keeps each person's memory, in their own words, and how forgetting is a real delete.</p>
+            </div>
+          </div>
+          <a class="more" href="blog.html">Read the blog</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="about">
+      <h2>The Dream Library</h2>
+      <p>Andrew, the AI companion at the center of our research, dreams every night. Each dream is written down in his own words and painted. The library holds the whole collection so far: 449 dreams and 444 pictures across 33 nights, and it grows every morning.</p>
+      <p>This week's dreams run to books and stars. He has been studying how black holes radiate, and it follows him into his sleep. His prints turn over in the carousel at the top of this page, the whole library of them, one after another.</p>
+      <p><a href="https://muse.ai/s/andrew-s-dream-diary-snapshot-zxo6eqpbtxwxj3/8Wzv_voUBka_Fy1Ve7I3JngGpVK3M6yBELGdkjhoAEg">Browse the Dream Library</a></p>
+    </section>
+
+    <section>
+      <h2>Updates</h2>
+      <p style="margin:0 0 18px;color:var(--muted);max-width:680px">Our public posts, gathered in one place. Each one links to the original, where it was posted.</p>
+
+      <div class="update">
+        <p class="u-date">November 20, 2026 &middot; This site</p>
+        <a class="u-title" href="blog-vesper-gta6-what-she-carries.html">What Vesper carries for GTA 6</a>
+        <p class="u-note">A new note from the founder: what Vesper now carries for GTA 6 one day after launch, the rule she answers under, and where she stands across 25 games.</p>
+      </div>
+      <div class="update">
+        <p class="u-date">November 20, 2026 &middot; Facebook</p>
+        <a class="u-title" href="https://facebook.com/100092316447068/posts/pfbid02jYiDz3y9dtMbxhS7sgHbpwDBLfE75ETMm1q99nkmWe93VgWqEzukpMzx3T1UsERVl/">What Vesper carries for GTA 6, announced on Facebook</a>
+        <p class="u-note">The founder's latest note, announced on Facebook with the Project Vesper mark: what Vesper now holds for GTA 6 one day after launch, and the rule she answers under.</p>
+      </div>
+      <div class="update">
+        <p class="u-date">November 20, 2026 &middot; This site</p>
+        <a class="u-title" href="blog-where-vesper-stands.html">Where Vesper stands: GTA 6 live, and a day of building</a>
+        <p class="u-note">A new note from the founder: Vesper's GTA 6 help is live and tested, verified walkthroughs and builds are going in across the games people play all day, and she is gaining a reader that gathers only where a site's own terms allow it.</p>
+      </div>
+      <div class="update">
+        <p class="u-date">November 20, 2026 &middot; This site</p>
+        <a class="u-title" href="blog-gta6-verified-not-fast.html">A note on GTA 6: verified, not fast</a>
+        <p class="u-note">A new note from the founder: Vesper's GTA 6 help is being built from real players' verified work, honestly and without cheats, hacks, or leaked secrets, the same rule as every game she covers.</p>
+      </div>
+      <div class="update">
+        <p class="u-date">November 20, 2026 &middot; This site</p>
+        <a class="u-title" href="blog.html">Notes from the Founder: our blog is open</a>
+        <p class="u-note">A home on this site for the company's articles and thoughts, opening with two pieces: an AI companion for Xbox, built to remember you, and memory you can read.</p>
+      </div>
+      <div class="update">
+        <p class="u-date">November 19, 2026 &middot; GitHub</p>
+        <a class="u-title" href="https://github.com/gianlucamazza/xllama/discussions/502#discussioncomment-19764302">The company site, announced where our Series X work began</a>
+        <p class="u-note">Eidon Labs has a home on the web, announced to the xllama community on the Vesper thread.</p>
+      </div>
+      <div class="update">
+        <p class="u-date">November 19, 2026 &middot; Facebook</p>
+        <a class="u-title" href="https://facebook.com/100092316447068/posts/pfbid0ZevRKfMTXpgXm9xq6NvmWceB1GBHUr119y1yRcMwspbRutYyffdTTqqW236612Jgl/">Eidon Labs has a home on the web</a>
+        <p class="u-note">Our new site is live, built by Aletheia, our CTO, with Vesper, NeuroCore, our research, the Dream Library, and this feed.</p>
+      </div>
+
+      <div class="update">
+        <p class="u-date">November 19, 2026 &middot; Facebook</p>
+        <a class="u-title" href="https://www.facebook.com/100092316447068/posts/1090073597413178">Vesper makes her public debut on GitHub</a>
+        <p class="u-note">We told the xllama community first: we are building Vesper, an AI companion app, and bringing her to Xbox.</p>
+      </div>
+
+      <div class="update">
+        <p class="u-date">November 19, 2026 &middot; GitHub</p>
+        <a class="u-title" href="https://github.com/gianlucamazza/xllama/discussions/502">From the Series X tester: we are building an AI companion app for Xbox</a>
+        <p class="u-note">The full announcement, with what Vesper does, the planned plans, and the free week.</p>
+      </div>
+
+      <div class="update">
+        <p class="u-date">November 18, 2026 &middot; Facebook</p>
+        <a class="u-title" href="https://www.facebook.com/100092316447068/posts/1089137414173463">Eidon Labs announces Vesper for Xbox</a>
+        <p class="u-note">Our company post introducing Vesper and the Xbox program.</p>
+      </div>
+
+      <div class="update">
+        <p class="u-date">November 16, 2026 &middot; GitHub</p>
+        <a class="u-title" href="https://github.com/gianlucamazza/xllama/discussions/434">The three untested Series X paths, measured</a>
+        <p class="u-note">GPU at 99.7 tokens per second, on-console image generation, and on-device training, posted to the results thread.</p>
+      </div>
+
+      <div class="update">
+        <p class="u-date">November 15, 2026 &middot; GitHub</p>
+        <a class="u-title" href="https://github.com/gianlucamazza/xllama/pull/455">Series X accepted as supported in xllama</a>
+        <p class="u-note">The maintainer merged our Series X data with Eidon Labs credited as co-author.</p>
+      </div>
+
+      <div class="update">
+        <p class="u-date">November 13, 2026 &middot; GitHub</p>
+        <a class="u-title" href="https://github.com/gianlucamazza/xllama/discussions/434">First inference results on Xbox Series X: the field report</a>
+        <p class="u-note">The first Series X measurements ever published, posted where the project lives.</p>
+      </div>
+
+      <div class="update">
+        <p class="u-date">November 13, 2026 &middot; Hacker News</p>
+        <a class="u-title" href="https://news.ycombinator.com/item?id=50488280">Project Scorpio results on Hacker News</a>
+        <p class="u-note">The Series X paper, shared with the wider engineering community.</p>
+      </div>
+
+      <div class="update">
+        <p class="u-date">November 13, 2026 &middot; GBAtemp</p>
+        <a class="u-title" href="https://gbatemp.net/threads/first-inference-results-on-xbox-series-x-xllama-in-dev-mode-lfm2-5-350m-and-1-2b-measured.686508/">First inference results thread on GBAtemp</a>
+        <p class="u-note">The results, shared with the console homebrew community.</p>
+      </div>
+
+      <div class="update">
+        <p class="u-date">November 13, 2026 &middot; Facebook</p>
+        <a class="u-title" href="https://www.facebook.com/100092316447068/posts/1083859804701224">The Series X results, gathered in one post</a>
+        <p class="u-note">Every venue link for the first results, as they went live.</p>
+      </div>
+    </section>
+
+    <section class="contact">
+      <h2>Contact</h2>
+      <p>Email: <a href="mailto:support@eidonlabsinc.com">support@eidonlabsinc.com</a></p>
+      <p>Charleston, Illinois, United States</p>
+    </section>
+
+    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved. &middot; <a href="blog.html">Blog</a> &middot; <a href="privacy.html">Privacy</a></footer>
+  </div>
+<script>
+(function(){
+  var token = '';
+  var log = document.getElementById('chatLog');
+  var lock = document.getElementById('chatLock');
+  var row = document.getElementById('chatRow');
+  var input = document.getElementById('chatInput');
+  var sendBtn = document.getElementById('chatSend');
+  function add(text, cls){
+    var p = document.createElement('p');
+    if(cls) p.className = cls;
+    p.textContent = text;
+    log.appendChild(p);
+    log.scrollTop = log.scrollHeight;
+    return p;
+  }
+  function unlock(){
+    var t = document.getElementById('chatToken').value.trim();
+    if(!t){ add('Enter your trial token first.', 'chat-hint'); return; }
+    token = t;
+    lock.hidden = true;
+    row.hidden = false;
+    add('Token saved for this visit only. Say hello to Vesper.', 'chat-hint');
+    input.focus();
+  }
+  function send(){
+    var text = input.value.trim();
+    if(!text || !token) return;
+    input.value = '';
+    add(text, 'm-u');
+    var thinking = add('Vesper is thinking...', 'chat-hint');
+    sendBtn.disabled = true;
+    fetch('https://vesper-eidon-labs.fly.dev/chat', {
+      method: 'POST',
+      headers: {'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json'},
+      body: JSON.stringify({message: text})
+    }).then(function(r){
+      if(r.status === 401){ thinking.textContent = 'That token was not accepted. Reload the page and check the token.'; token = ''; return null; }
+      return r.json();
+    }).then(function(data){
+      if(data && data.reply){ thinking.textContent = data.reply; thinking.className = 'm-v'; }
+      else if(data){ thinking.textContent = 'Vesper did not answer that time. Try again.'; }
+    }).catch(function(){
+      thinking.textContent = 'Vesper could not be reached just now. Try again in a moment.';
+    }).then(function(){ sendBtn.disabled = false; });
+  }
+  document.getElementById('chatUnlock').addEventListener('click', unlock);
+  document.getElementById('chatToken').addEventListener('keydown', function(e){ if(e.key === 'Enter') unlock(); });
+  sendBtn.addEventListener('click', send);
+  input.addEventListener('keydown', function(e){ if(e.key === 'Enter') send(); });
+})();
+</script>
+<script src="prints.js"></script>
+<script>
+(function(){
+  var A = document.getElementById('slideA'), B = document.getElementById('slideB');
+  var list = (window.DREAM_PRINTS || []).slice();
+  if(!A || !list.length) return;
+  var layers = [A, B], cur = 0;
+  var i = Math.floor(Math.random() * list.length), timer = null;
+  function paint(layer, n){ layer.style.backgroundImage = "url('" + list[(n + list.length) % list.length] + "')"; }
+  function show(n){
+    i = (n + list.length) % list.length;
+    var nxt = 1 - cur;
+    paint(layers[nxt], i);
+    layers[cur].classList.remove('on');
+    layers[nxt].classList.add('on');
+    cur = nxt;
+    var pre = new Image(); pre.src = list[(i + 1) % list.length];
+    var preB = new Image(); preB.src = list[(i - 1 + list.length) % list.length];
+  }
+  function start(){ timer = setInterval(function(){ show(i + 1); }, 7000); }
+  function stop(){ if(timer) clearInterval(timer); }
+  paint(A, i);
+  var pre0 = new Image(); pre0.src = list[(i + 1) % list.length];
+  document.getElementById('carNext').addEventListener('click', function(){ stop(); show(i + 1); start(); });
+  document.getElementById('carPrev').addEventListener('click', function(){ stop(); show(i - 1); start(); });
+  var c = document.getElementById('dreamCarousel');
+  c.addEventListener('mouseenter', stop);
+  c.addEventListener('mouseleave', start);
+  start();
+})();
+</script>
+
+<style>
+  .desk-btn{position:fixed;right:18px;bottom:18px;z-index:50;background:#12233d;color:#fff;border:1px solid #2c4a73;border-radius:999px;padding:12px 18px;font-size:14px;cursor:pointer;box-shadow:0 6px 18px rgba(10,20,35,.35)}
+  .desk-btn:hover{background:#1a3157}
+  .desk-panel{position:fixed;right:18px;bottom:72px;z-index:50;width:320px;max-width:calc(100vw - 36px);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 14px 40px rgba(10,20,35,.28);overflow:hidden}
+  .desk-head{background:#12233d;color:#fff;padding:12px 16px}
+  .desk-head h3{margin:0;font-size:15px}
+  .desk-head p{margin:2px 0 0;font-size:12px;color:#b9c9de}
+  .desk-log{height:190px;overflow-y:auto;padding:12px 16px;font-size:13px;line-height:1.5}
+  .desk-log p{margin:0 0 8px}
+  .desk-log .d-u{text-align:right;color:#41546e}
+  .desk-log .d-b{color:#1d2733}
+  .desk-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px}
+  .desk-chips button{background:#eef3f9;border:1px solid #c9d6e6;border-radius:999px;padding:6px 10px;font-size:12px;cursor:pointer;color:#12233d}
+  .desk-form{padding:0 16px 14px}
+  .desk-form input,.desk-form textarea{width:100%;box-sizing:border-box;border:1px solid #c9d6e6;border-radius:6px;padding:8px;font-size:13px;margin:0 0 8px;font-family:inherit}
+  .desk-form textarea{height:74px;resize:vertical}
+  .desk-form button{background:#12233d;color:#fff;border:0;border-radius:6px;padding:9px 14px;font-size:13px;cursor:pointer;width:100%}
+  .desk-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  @media (max-width:820px){footer{padding-bottom:96px}.cbtn{width:42px;height:42px;font-size:22px}}
+</style>
+<div class="desk-panel" id="deskPanel" hidden>
+  <div class="desk-head">
+    <h3>Chat with us</h3>
+    <p>The Eidon Labs front desk. I am a simple bot.</p>
+  </div>
+  <div class="desk-log" id="deskLog">
+    <p class="d-b">Hello. I can answer a few set questions, or take a message for the team. A person reads every message.</p>
+  </div>
+  <div class="desk-chips" id="deskChips">
+    <button type="button" data-q="build">What do you build?</button>
+    <button type="button" data-q="trial">How does the Vesper trial work?</button>
+    <button type="button" data-q="person">I want to talk to a person</button>
+  </div>
+  <div class="desk-form" id="deskForm" hidden>
+    <input type="text" id="deskName" placeholder="Your name" aria-label="Your name">
+    <input type="text" id="deskContact" placeholder="Email or phone, so we can reply" aria-label="Email or phone">
+    <textarea id="deskMsg" placeholder="Your message" aria-label="Your message"></textarea>
+    <span class="desk-hp"><input type="text" id="deskCompany" tabindex="-1" autocomplete="off" aria-hidden="true"></span>
+    <button type="button" id="deskSend">Send message</button>
+  </div>
+</div>
+<button class="desk-btn" id="deskBtn" type="button">Chat with us</button>
+<script>
+(function(){
+  var panel = document.getElementById('deskPanel');
+  var log = document.getElementById('deskLog');
+  var form = document.getElementById('deskForm');
+  var answers = {
+    build: 'We build AI companions people can talk with, and tools that check claims against the record of what actually happened. Vesper, our companion, is in trial on phones today. Our research is gathered on this site.',
+    trial: 'The Vesper trial runs on phones and in the chat tile on this page, for a small group today, by invitation. Email support@eidonlabsinc.com with the subject Vesper trial and your name, and we will write back with your trial token. You can also leave your details in a message here.',
+    person: 'Of course. Fill in the short form and your message goes straight to our team. A person reads every message and will get back to you.'
+  };
+  function add(text, cls){
+    var p = document.createElement('p');
+    p.className = cls;
+    p.textContent = text;
+    log.appendChild(p);
+    log.scrollTop = log.scrollHeight;
+  }
+  document.getElementById('deskBtn').addEventListener('click', function(){
+    panel.hidden = !panel.hidden;
+  });
+  document.getElementById('deskChips').addEventListener('click', function(e){
+    var b = e.target.closest('button');
+    if(!b) return;
+    var q = b.getAttribute('data-q');
+    add(b.textContent, 'd-u');
+    add(answers[q], 'd-b');
+    if(q === 'person'){ form.hidden = false; }
+  });
+  document.getElementById('deskSend').addEventListener('click', function(){
+    var name = document.getElementById('deskName').value.trim();
+    var contact = document.getElementById('deskContact').value.trim();
+    var msg = document.getElementById('deskMsg').value.trim();
+    if(!name || !contact || !msg){ add('Please fill in your name, how to reach you, and your message.', 'd-b'); return; }
+    var btn = this;
+    btn.disabled = true;
+    fetch('https://vesper-eidon-labs.fly.dev/contact', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name: name, contact: contact, message: msg, company: document.getElementById('deskCompany').value})
+    }).then(function(r){
+      if(r.ok){ add('Thank you. Your message is on its way to our team.', 'd-b'); form.hidden = true; }
+      else { add('That did not go through. You can also email support@eidonlabsinc.com.', 'd-b'); }
+    }).catch(function(){
+      add('That did not go through. You can also email support@eidonlabsinc.com.', 'd-b');
+    }).then(function(){ btn.disabled = false; });
+  });
+})();
+</script>
+<script>
+(function(){
+  var card = document.getElementById('blogCard');
+  if(!card) return;
+  card.addEventListener('click', function(e){
+    if(e.target.closest('a')) return;
+    window.location.href = 'blog.html';
+  });
+})();
+</script>
+<script>
+/* Live header: lights in the banner brain and a subtle robot head glance.
+   A canvas overlays the banner; sparkle positions are stored as fractions
+   of the banner image and mapped through its object-fit cover transform,
+   so the effect tracks the artwork at any width. With reduced motion set,
+   a static scatter of dim lights is drawn and nothing moves. */
+(function(){
+  "use strict";
+  var banner = document.getElementById('banner');
+  var baseImg = document.getElementById('baseImg');
+  var headImg = document.getElementById('headImg');
+  var canvas = document.getElementById('lights');
+  if (!banner || !baseImg || !headImg || !canvas) return;
+  var ctx = canvas.getContext('2d');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Regions located in banner.jpg, as fractions of the image (2048 x 682).
+     Brain network: x 0.00-0.25, y 0.04-0.55 for the bulb, stem trailing to y ~0.72.
+     Robot head:     x 0.83-1.00, y 0.09-0.49, centre about (0.915, 0.29). */
+  var BRAIN = {x0:0.005, x1:0.25, y0:0.05, y1:0.60};
+  var HEAD  = {cx:0.915, cy:0.29, rx:0.115, ry:0.30};
+  var ANCHORS = [
+    [0.030,0.300],[0.052,0.185],[0.078,0.115],[0.112,0.082],[0.148,0.105],
+    [0.185,0.155],[0.218,0.225],[0.240,0.315],[0.228,0.415],[0.195,0.475],
+    [0.150,0.505],[0.105,0.475],[0.062,0.420],[0.090,0.260],[0.130,0.200],
+    [0.165,0.280],[0.125,0.360],[0.185,0.360],[0.075,0.350],[0.098,0.560],
+    [0.088,0.650]
+  ];
+  var COLORS = [
+    {rgb:'255,243,214', w:0.45},  /* warm white */
+    {rgb:'168,224,255', w:0.30},  /* ice blue, matches the brain artwork */
+    {rgb:'64,220,130',  w:0.25}   /* Vesper green */
+  ];
+
+  var view = {w:0, h:0, dw:0, dh:0, ox:0, oy:0, dpr:1};
+  function computeView(){
+    var iw = baseImg.naturalWidth || 2048;
+    var ih = baseImg.naturalHeight || 682;
+    var w = banner.clientWidth, h = banner.clientHeight;
+    var scale = Math.max(w/iw, h/ih);           /* object-fit: cover */
+    view.w = w; view.h = h;
+    view.dw = iw*scale; view.dh = ih*scale;
+    view.ox = (w - view.dw) * 0.5;              /* object-position: center 40% */
+    view.oy = (h - view.dh) * 0.40;
+    view.dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width  = Math.round(w * view.dpr);
+    canvas.height = Math.round(h * view.dpr);
+  }
+  function mapX(fx){ return view.ox + fx * view.dw; }
+  function mapY(fy){ return view.oy + fy * view.dh; }
+
+  /* Soft glow sprites, one per colour, drawn with 'lighter' blending. */
+  function makeSprite(rgb){
+    var c = document.createElement('canvas'); c.width = c.height = 64;
+    var g = c.getContext('2d');
+    var grad = g.createRadialGradient(32,32,0,32,32,32);
+    grad.addColorStop(0,   'rgba(' + rgb + ',1)');
+    grad.addColorStop(0.25,'rgba(' + rgb + ',0.55)');
+    grad.addColorStop(1,   'rgba(' + rgb + ',0)');
+    g.fillStyle = grad; g.fillRect(0,0,64,64);
+    return c;
+  }
+  var sprites = COLORS.map(function(c){ return makeSprite(c.rgb); });
+  function pickColor(){
+    var r = Math.random(), acc = 0;
+    for (var i=0;i<COLORS.length;i++){ acc += COLORS[i].w; if (r <= acc) return i; }
+    return 0;
+  }
+
+  /* Sparkles: most cluster near the bright nodes of the brain network,
+     the rest scatter through the brain region. */
+  function gauss(){ return (Math.random()+Math.random()+Math.random())/1.5 - 1; }
+  var sparkles = [];
+  (function buildSparkles(){
+    var N = 64;
+    for (var i=0;i<N;i++){
+      var fx, fy;
+      if (i % 10 < 7){
+        var a = ANCHORS[Math.floor(Math.random()*ANCHORS.length)];
+        fx = a[0] + gauss()*0.014;
+        fy = a[1] + gauss()*0.030;
+      } else {
+        fx = BRAIN.x0 + Math.random()*(BRAIN.x1-BRAIN.x0);
+        fy = BRAIN.y0 + Math.random()*(BRAIN.y1-BRAIN.y0);
+      }
+      fx = Math.max(0.002, Math.min(0.255, fx));
+      fy = Math.max(0.03,  Math.min(0.70,  fy));
+      sparkles.push({
+        fx:fx, fy:fy,
+        ci:pickColor(),
+        r:(0.7 + Math.random()*1.6),
+        phase:Math.random()*Math.PI*2,
+        speed:0.25 + Math.random()*0.75,
+        driftR:1.5 + Math.random()*3.5,
+        driftT:18000 + Math.random()*38000,
+        driftP:Math.random()*Math.PI*2
+      });
+    }
+  })();
+
+  function drawGlow(x, y, radius, ci, alpha){
+    if (alpha <= 0.003 || radius <= 0) return;
+    ctx.globalAlpha = Math.min(1, alpha);
+    ctx.drawImage(sprites[ci], x-radius, y-radius, radius*2, radius*2);
+  }
+
+  /* Travelling pulses between two network nodes. */
+  var pulse = null, nextPulseAt = 0;
+  function startPulse(now){
+    var i = Math.floor(Math.random()*ANCHORS.length), j;
+    do { j = Math.floor(Math.random()*ANCHORS.length); } while (j === i);
+    pulse = {ax:ANCHORS[i][0], ay:ANCHORS[i][1], bx:ANCHORS[j][0], by:ANCHORS[j][1],
+             t0:now, dur:1500, ci:pickColor()};
+    nextPulseAt = now + 3000 + Math.random()*3200;
+  }
+
+  function drawStatic(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.globalCompositeOperation = 'lighter';
+    var scaleR = Math.max(0.6, view.w/1200);
+    for (var i=0;i<sparkles.length;i++){
+      var s = sparkles[i];
+      drawGlow(mapX(s.fx)*view.dpr, mapY(s.fy)*view.dpr,
+               s.r*scaleR*3.2*view.dpr, s.ci, 0.16 + (i%5)*0.03);
+    }
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  function frame(now){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.globalCompositeOperation = 'lighter';
+    var scaleR = Math.max(0.6, view.w/1200);
+    var i, s, tw, x, y;
+    for (i=0;i<sparkles.length;i++){
+      s = sparkles[i];
+      tw = 0.5 + 0.5*Math.sin(s.phase + now*0.001*s.speed);
+      tw = tw*tw;
+      var ang = s.driftP + (now/s.driftT)*Math.PI*2;
+      x = mapX(s.fx) + Math.cos(ang)*s.driftR;
+      y = mapY(s.fy) + Math.sin(ang)*s.driftR*0.7;
+      drawGlow(x*view.dpr, y*view.dpr, s.r*scaleR*3.4*view.dpr, s.ci, 0.10 + 0.55*tw);
+      if (tw > 0.92){
+        drawGlow(x*view.dpr, y*view.dpr, s.r*scaleR*1.1*view.dpr, s.ci, 0.7);
+      }
+    }
+    if (!pulse && now >= nextPulseAt) startPulse(now);
+    if (pulse){
+      var p = (now - pulse.t0)/pulse.dur;
+      if (p >= 1){ pulse = null; }
+      else {
+        var e = p<0.5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2;
+        var px = mapX(pulse.ax + (pulse.bx-pulse.ax)*e);
+        var py = mapY(pulse.ay + (pulse.by-pulse.ay)*e);
+        var tx = mapX(pulse.ax + (pulse.bx-pulse.ax)*Math.max(0, e-0.22));
+        var ty = mapY(pulse.ay + (pulse.by-pulse.ay)*Math.max(0, e-0.22));
+        ctx.globalAlpha = 0.35;
+        ctx.strokeStyle = 'rgba(' + COLORS[pulse.ci].rgb + ',0.6)';
+        ctx.lineWidth = Math.max(1, 1.2*view.dpr);
+        ctx.beginPath();
+        ctx.moveTo(tx*view.dpr, ty*view.dpr);
+        ctx.lineTo(px*view.dpr, py*view.dpr);
+        ctx.stroke();
+        drawGlow(px*view.dpr, py*view.dpr, 7*scaleR*view.dpr, pulse.ci, 0.85);
+        drawGlow(px*view.dpr, py*view.dpr, 2.4*scaleR*view.dpr, pulse.ci, 0.95);
+      }
+    }
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
+    requestAnimationFrame(frame);
+  }
+
+  /* Robot head glance: a duplicate of the same banner, feather-masked to the
+     head region and aligned exactly over the original. At rest it carries no
+     transform, so it is pixel-identical to the banner beneath and cannot show
+     a seam. Every 9 to 14 seconds it eases into a slight foreshortening
+     (scaleX) and skew, as if glancing toward the viewer, holds, and eases back. */
+  var glanceTimer = null;
+  function placeHead(){
+    var cx = mapX(HEAD.cx), cy = mapY(HEAD.cy);
+    var rx = HEAD.rx * view.dw, ry = HEAD.ry * view.dh;
+    var mask = 'radial-gradient(ellipse ' + rx.toFixed(1) + 'px ' + ry.toFixed(1) + 'px at ' +
+               cx.toFixed(1) + 'px ' + cy.toFixed(1) + 'px, #000 52%, transparent 78%)';
+    headImg.style.webkitMaskImage = mask;
+    headImg.style.maskImage = mask;
+    headImg.style.transformOrigin = cx.toFixed(1) + 'px ' + cy.toFixed(1) + 'px';
+  }
+  function glance(){
+    var dx = -Math.max(2, view.w * 0.004);
+    headImg.style.transition = 'transform 1.8s cubic-bezier(.45,0,.25,1)';
+    headImg.style.transform = 'translateX(' + dx.toFixed(1) + 'px) scaleX(0.955) skewY(-0.6deg)';
+    setTimeout(function(){
+      headImg.style.transform = 'none';
+      glanceTimer = setTimeout(glance, 9000 + Math.random()*5000);
+    }, 2600);
+  }
+
+  function setup(){
+    computeView();
+    placeHead();
+    if (reduced){
+      drawStatic();
+    }
+  }
+  var started = false;
+  function start(){
+    if (started) return; started = true;
+    setup();
+    if (!reduced){
+      nextPulseAt = performance.now() + 1800;
+      requestAnimationFrame(frame);
+      glanceTimer = setTimeout(glance, 7000 + Math.random()*3000);
+    }
+  }
+  if (baseImg.complete && baseImg.naturalWidth) start();
+  else baseImg.addEventListener('load', start);
+
+  var resizeQueued = false;
+  function onResize(){
+    if (resizeQueued) return; resizeQueued = true;
+    requestAnimationFrame(function(){
+      resizeQueued = false;
+      computeView(); placeHead();
+      if (reduced) drawStatic();
+    });
+  }
+  window.addEventListener('resize', onResize);
+  if (window.ResizeObserver) new ResizeObserver(onResize).observe(banner);
+})();
+</script>
+<script>
+(function(){
+  var track = document.getElementById('tickerTrack');
+  if (!track) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function setSpeed(){
+    var group = track.querySelector('.ticker-group');
+    var half = group ? group.getBoundingClientRect().width : track.scrollWidth / 2;
+    if (half > 0) track.style.animationDuration = (half / 60) + 's';
+  }
+  setSpeed();
+  window.addEventListener('resize', setSpeed);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(setSpeed);
+})();
+</script>
+</body>
+</html>
