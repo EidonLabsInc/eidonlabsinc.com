@@ -170,7 +170,7 @@
     msg.textContent = 'Linking...';
     msg.className = 'pair-msg';
     call('/pairing/claim', {code: code}, msg, function(){
-      msg.textContent = 'That TV is linked to your account. The app on the TV will sign itself in as you.';
+      msg.textContent = 'That TV is linked to your account. On the TV, choose "I entered it - continue" and the app will sign in as you.';
       msg.className = 'pair-msg';
     });
   });
