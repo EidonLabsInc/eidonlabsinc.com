@@ -845,5 +845,20 @@
   } catch (e) {}
 })();
 </script>
+<div id="vcBox" style="position:fixed;left:10px;bottom:8px;z-index:60;font-size:11px;letter-spacing:.04em;color:#5a6b60;opacity:.8;font-family:inherit;">VC <span id="vcCount"></span></div>
+<script>
+(function(){
+  var el = document.getElementById('vcCount');
+  if (!el) return;
+  try {
+    fetch('https://api.counterapi.dev/v1/eidonlabsinc/vc/up', {cache: 'no-store'}).then(function(r){
+      if (!r || !r.ok) return null;
+      return r.json();
+    }).then(function(data){
+      if (data && typeof data.count === 'number') el.textContent = data.count;
+    }).catch(function(){});
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>
