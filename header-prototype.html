@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eidon Labs Header Prototype (not published)</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:#02081a;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+  /* Banner presentation copied from the live site: full width, height clamped,
+     object-fit cover, object-position center 40%. */
+  .banner{position:relative;background:#02081a;overflow:hidden}
+  .banner img.base{width:100%;height:clamp(118px,32vw,430px);object-fit:cover;object-position:center 40%;display:block}
+  .banner img.head{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 40%;display:block;pointer-events:none;will-change:transform}
+  .banner canvas{position:absolute;inset:0;width:100%;height:100%;display:block;pointer-events:none}
+  .caption{color:#8d99a8;font-size:14px;text-align:center;padding:14px 24px 22px;margin:0;letter-spacing:.04em}
+</style>
+</head>
+<body>
+  <div class="banner" id="banner">
+    <img class="base" id="baseImg" src="banner.jpg" alt="Eidon Labs. AI, Robotics, Advanced Innovation.">
+    <img class="head" id="headImg" src="banner.jpg" alt="" aria-hidden="true">
+    <canvas id="lights"></canvas>
+  </div>
+  <p class="caption">Prototype: live lights in the header brain. Not published.</p>
+
+<script>
+(function(){
+  "use strict";
+  var banner = document.getElementById('banner');
+  var baseImg = document.getElementById('baseImg');
+  var headImg = document.getElementById('headImg');
+  var canvas = document.getElementById('lights');
+  var ctx = canvas.getContext('2d');
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Regions located in banner.jpg, as fractions of the image (2048 x 682).
+     Brain network: x 0.00-0.25, y 0.04-0.55 for the bulb, stem trailing to y ~0.72.
+     Robot head:     x 0.83-1.00, y 0.09-0.49, centre about (0.915, 0.29). */
+  var BRAIN = {x0:0.005, x1:0.25, y0:0.05, y1:0.60};
+  var HEAD  = {cx:0.915, cy:0.29, rx:0.115, ry:0.30};
+  var ANCHORS = [
+    [0.030,0.300],[0.052,0.185],[0.078,0.115],[0.112,0.082],[0.148,0.105],
+    [0.185,0.155],[0.218,0.225],[0.240,0.315],[0.228,0.415],[0.195,0.475],
+    [0.150,0.505],[0.105,0.475],[0.062,0.420],[0.090,0.260],[0.130,0.200],
+    [0.165,0.280],[0.125,0.360],[0.185,0.360],[0.075,0.350],[0.098,0.560],
+    [0.088,0.650]
+  ];
+  var COLORS = [
+    {rgb:'255,243,214', w:0.45},  /* warm white */
+    {rgb:'168,224,255', w:0.30},  /* ice blue, matches the brain artwork */
+    {rgb:'64,220,130',  w:0.25}   /* Vesper green */
+  ];
+
+  var view = {w:0, h:0, dw:0, dh:0, ox:0, oy:0, dpr:1};
+  function computeView(){
+    var iw = baseImg.naturalWidth || 2048;
+    var ih = baseImg.naturalHeight || 682;
+    var w = banner.clientWidth, h = banner.clientHeight;
+    var scale = Math.max(w/iw, h/ih);           /* object-fit: cover */
+    view.w = w; view.h = h;
+    view.dw = iw*scale; view.dh = ih*scale;
+    view.ox = (w - view.dw) * 0.5;              /* object-position: center 40% */
+    view.oy = (h - view.dh) * 0.40;
+    view.dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width  = Math.round(w * view.dpr);
+    canvas.height = Math.round(h * view.dpr);
+  }
+  function mapX(fx){ return view.ox + fx * view.dw; }
+  function mapY(fy){ return view.oy + fy * view.dh; }
+
+  /* Soft glow sprites, one per colour, drawn with 'lighter' blending. */
+  function makeSprite(rgb){
+    var c = document.createElement('canvas'); c.width = c.height = 64;
+    var g = c.getContext('2d');
+    var grad = g.createRadialGradient(32,32,0,32,32,32);
+    grad.addColorStop(0,   'rgba(' + rgb + ',1)');
+    grad.addColorStop(0.25,'rgba(' + rgb + ',0.55)');
+    grad.addColorStop(1,   'rgba(' + rgb + ',0)');
+    g.fillStyle = grad; g.fillRect(0,0,64,64);
+    return c;
+  }
+  var sprites = COLORS.map(function(c){ return makeSprite(c.rgb); });
+  function pickColor(){
+    var r = Math.random(), acc = 0;
+    for (var i=0;i<COLORS.length;i++){ acc += COLORS[i].w; if (r <= acc) return i; }
+    return 0;
+  }
+
+  /* Sparkles: most cluster near the bright nodes of the brain network,
+     the rest scatter through the brain region. Positions are stored as
+     image fractions, so the overlay tracks the banner at any size. */
+  function gauss(){ return (Math.random()+Math.random()+Math.random())/1.5 - 1; }
+  var sparkles = [];
+  (function buildSparkles(){
+    var N = 64;
+    for (var i=0;i<N;i++){
+      var fx, fy;
+      if (i % 10 < 7){
+        var a = ANCHORS[Math.floor(Math.random()*ANCHORS.length)];
+        fx = a[0] + gauss()*0.014;
+        fy = a[1] + gauss()*0.030;
+      } else {
+        fx = BRAIN.x0 + Math.random()*(BRAIN.x1-BRAIN.x0);
+        fy = BRAIN.y0 + Math.random()*(BRAIN.y1-BRAIN.y0);
+      }
+      fx = Math.max(0.002, Math.min(0.255, fx));
+      fy = Math.max(0.03,  Math.min(0.70,  fy));
+      sparkles.push({
+        fx:fx, fy:fy,
+        ci:pickColor(),
+        r:(0.7 + Math.random()*1.6),                 /* base radius, scaled below */
+        phase:Math.random()*Math.PI*2,
+        speed:0.25 + Math.random()*0.75,             /* twinkle rate, slow */
+        driftR:1.5 + Math.random()*3.5,              /* px of slow wander */
+        driftT:18000 + Math.random()*38000,          /* wander period, ms */
+        driftP:Math.random()*Math.PI*2
+      });
+    }
+  })();
+
+  function drawGlow(x, y, radius, ci, alpha){
+    if (alpha <= 0.003 || radius <= 0) return;
+    ctx.globalAlpha = Math.min(1, alpha);
+    ctx.drawImage(sprites[ci], x-radius, y-radius, radius*2, radius*2);
+  }
+
+  /* Travelling pulses between two network nodes. */
+  var pulse = null, nextPulseAt = 0;
+  function startPulse(now){
+    var i = Math.floor(Math.random()*ANCHORS.length), j;
+    do { j = Math.floor(Math.random()*ANCHORS.length); } while (j === i);
+    pulse = {ax:ANCHORS[i][0], ay:ANCHORS[i][1], bx:ANCHORS[j][0], by:ANCHORS[j][1],
+             t0:now, dur:1500, ci:pickColor()};
+    nextPulseAt = now + 3000 + Math.random()*3200;
+  }
+
+  function drawStatic(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.globalCompositeOperation = 'lighter';
+    var scaleR = Math.max(0.6, view.w/1200);
+    for (var i=0;i<sparkles.length;i++){
+      var s = sparkles[i];
+      drawGlow(mapX(s.fx)*view.dpr, mapY(s.fy)*view.dpr,
+               s.r*scaleR*3.2*view.dpr, s.ci, 0.16 + (i%5)*0.03);
+    }
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  function frame(now){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.globalCompositeOperation = 'lighter';
+    var scaleR = Math.max(0.6, view.w/1200);
+    var i, s, tw, x, y;
+    for (i=0;i<sparkles.length;i++){
+      s = sparkles[i];
+      tw = 0.5 + 0.5*Math.sin(s.phase + now*0.001*s.speed);
+      tw = tw*tw;                                    /* soften the twinkle */
+      var ang = s.driftP + (now/s.driftT)*Math.PI*2;
+      x = mapX(s.fx) + Math.cos(ang)*s.driftR;
+      y = mapY(s.fy) + Math.sin(ang)*s.driftR*0.7;
+      drawGlow(x*view.dpr, y*view.dpr, s.r*scaleR*3.4*view.dpr, s.ci, 0.10 + 0.55*tw);
+      if (tw > 0.92){                                /* a hot core at peak */
+        drawGlow(x*view.dpr, y*view.dpr, s.r*scaleR*1.1*view.dpr, s.ci, 0.7);
+      }
+    }
+    if (!pulse && now >= nextPulseAt) startPulse(now);
+    if (pulse){
+      var p = (now - pulse.t0)/pulse.dur;
+      if (p >= 1){ pulse = null; }
+      else {
+        var e = p<0.5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2;
+        var px = mapX(pulse.ax + (pulse.bx-pulse.ax)*e);
+        var py = mapY(pulse.ay + (pulse.by-pulse.ay)*e);
+        var tx = mapX(pulse.ax + (pulse.bx-pulse.ax)*Math.max(0, e-0.22));
+        var ty = mapY(pulse.ay + (pulse.by-pulse.ay)*Math.max(0, e-0.22));
+        ctx.globalAlpha = 0.35;
+        ctx.strokeStyle = 'rgba(' + COLORS[pulse.ci].rgb + ',0.6)';
+        ctx.lineWidth = Math.max(1, 1.2*view.dpr);
+        ctx.beginPath();
+        ctx.moveTo(tx*view.dpr, ty*view.dpr);
+        ctx.lineTo(px*view.dpr, py*view.dpr);
+        ctx.stroke();
+        drawGlow(px*view.dpr, py*view.dpr, 7*scaleR*view.dpr, pulse.ci, 0.85);
+        drawGlow(px*view.dpr, py*view.dpr, 2.4*scaleR*view.dpr, pulse.ci, 0.95);
+      }
+    }
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
+    requestAnimationFrame(frame);
+  }
+
+  /* Robot head glance: a duplicate of the same banner, feather-masked to the
+     head region and aligned exactly over the original. At rest it carries no
+     transform, so it is pixel-identical to the banner beneath and cannot show
+     a seam. Every 9 to 14 seconds it eases into a slight foreshortening
+     (scaleX) and skew, as if glancing toward the viewer, holds, and eases back. */
+  var glanceTimer = null;
+  function placeHead(){
+    var cx = mapX(HEAD.cx), cy = mapY(HEAD.cy);
+    var rx = HEAD.rx * view.dw, ry = HEAD.ry * view.dh;
+    var mask = 'radial-gradient(ellipse ' + rx.toFixed(1) + 'px ' + ry.toFixed(1) + 'px at ' +
+               cx.toFixed(1) + 'px ' + cy.toFixed(1) + 'px, #000 52%, transparent 78%)';
+    headImg.style.webkitMaskImage = mask;
+    headImg.style.maskImage = mask;
+    headImg.style.transformOrigin = cx.toFixed(1) + 'px ' + cy.toFixed(1) + 'px';
+  }
+  function glance(){
+    var dx = -Math.max(2, view.w * 0.004);
+    headImg.style.transition = 'transform 1.8s cubic-bezier(.45,0,.25,1)';
+    headImg.style.transform = 'translateX(' + dx.toFixed(1) + 'px) scaleX(0.955) skewY(-0.6deg)';
+    setTimeout(function(){
+      headImg.style.transform = 'none';
+      glanceTimer = setTimeout(glance, 9000 + Math.random()*5000);
+    }, 2600);
+  }
+
+  function setup(){
+    computeView();
+    placeHead();
+    if (reduced){
+      drawStatic();              /* static scatter of dim lights, no glance */
+    }
+  }
+  var started = false;
+  function start(){
+    if (started) return; started = true;
+    setup();
+    if (!reduced){
+      nextPulseAt = performance.now() + 1800;
+      requestAnimationFrame(frame);
+      glanceTimer = setTimeout(glance, 7000 + Math.random()*3000);
+    }
+  }
+  if (baseImg.complete && baseImg.naturalWidth) start();
+  else baseImg.addEventListener('load', start);
+
+  var resizeQueued = false;
+  function onResize(){
+    if (resizeQueued) return; resizeQueued = true;
+    requestAnimationFrame(function(){
+      resizeQueued = false;
+      computeView(); placeHead();
+      if (reduced) drawStatic();
+    });
+  }
+  window.addEventListener('resize', onResize);
+  if (window.ResizeObserver) new ResizeObserver(onResize).observe(banner);
+})();
+</script>
+</body>
+</html>
