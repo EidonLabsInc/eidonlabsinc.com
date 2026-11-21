@@ -45,7 +45,8 @@
   .card .more{display:block;margin-top:10px;font-size:13px;font-weight:600;color:#0b5cad}
   .about p{margin:0 0 14px;max-width:680px}
   .about-row{display:flex;gap:24px;align-items:flex-start;position:relative;left:50%;transform:translateX(-50%);width:min(1500px,calc(100vw - 48px))}
-  .about-row .about-main{flex:1;min-width:0}
+  .about-row .about-main{flex:1;min-width:0;align-self:stretch;display:flex;flex-direction:column}
+  .research-block{margin-top:auto;padding-top:28px}
   .founder-card{flex:none;width:292px;height:352px;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#02081a;position:relative}
   .founder-card img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
   .founder-cap{position:absolute;left:0;right:0;bottom:0;padding:30px 14px 11px;color:#e8edf3;background:linear-gradient(transparent,rgba(5,9,16,.75))}
@@ -189,6 +190,7 @@
         <div class="about-main">
           <p>Our work starts from a simple standard: a claim should be checked against the record, not against how true it sounds. We apply that standard to the AI systems we build and to the tools we make for everyone else.</p>
           <p>Eidon Labs Inc is a small, founder-led company. We design, build, and support our software ourselves.</p>
+          <div class="research-block">
           <h2>Research and results</h2>
 
           <h3 style="margin:22px 0 8px;font-size:18px">A companion that checked itself</h3>
@@ -201,6 +203,7 @@
           <p>Vesper's game help is not taken on trust, including by us. Fresh questions of the kind players actually ask are put to her in repeated rounds and every answer is checked against live sources. When she gets one wrong, the fault becomes a permanent test case her builders have to pass before the fix counts. Her game knowledge sits in a verified repository, stamped with the game's current version, rather than in the model's memory alone.</p>
 
           <p><a href="research.html">The full research page, including the report itself</a></p>
+          </div>
         </div>
         <div class="blog-card" id="blogCard" title="Open the blog">
           <h3>Notes from the Founder</h3>
