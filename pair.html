@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pair a TV - Eidon Labs Inc</title>
+  <meta name="description" content="Link the Vesper app on your TV to your trial account with a short pairing code.">
+  <link rel="icon" href="logo.jpg">
+  <meta property="og:title" content="Pair a TV - Eidon Labs Inc">
+  <meta property="og:description" content="Link the Vesper app on your TV to your trial account with a short pairing code.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://eidonlabsinc.com/pair.html">
+  <meta property="og:image" content="https://eidonlabsinc.com/banner.jpg">
+<style>
+  :root{
+    --ink:#1d2530; --muted:#5b6673; --accent:#b34a12; --line:#e4e8ed; --card:#f7f8fa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background-color:#fff;line-height:1.65}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  .banner{background:#02081a}
+  .banner img{width:100%;height:clamp(118px,32vw,430px);object-fit:cover;object-position:center 40%;display:block}
+  .place{background:#02081a;text-align:center;font-size:12px;color:#8d99a8;letter-spacing:.22em;text-transform:uppercase;padding:0 24px 16px}
+  .hero{padding:64px 0 8px}
+  .hero h1{font-size:32px;line-height:1.25;margin:0 0 14px;font-weight:700}
+  .hero p{font-size:17px;color:var(--muted);margin:0;max-width:660px}
+  section{padding:36px 0}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+  .entry{border-top:1px solid var(--line);padding:26px 0}
+  .entry:first-of-type{border-top:none}
+  .entry h3{margin:0 0 4px;font-size:20px}
+  .entry p{margin:0 0 12px;max-width:700px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--muted);font-size:13px}
+  .pair-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 12px}
+  .pair-row input{font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+  .pair-row input.code{letter-spacing:.18em;text-transform:uppercase;max-width:220px}
+  .pair-row button{font:inherit;padding:10px 18px;border:1px solid var(--accent);border-radius:8px;background:var(--accent);color:#fff;cursor:pointer}
+  .pair-row button:disabled{opacity:.55;cursor:default}
+  .big-code{font-size:34px;font-weight:700;letter-spacing:.22em;margin:6px 0 10px}
+  .pair-msg{color:var(--muted);max-width:700px}
+  .pair-msg.err{color:#a12622}
+</style>
+</head>
+<body>
+  <div class="banner">
+    <img src="banner.jpg" alt="Eidon Labs. AI, Robotics, Advanced Innovation.">
+  </div>
+  <div class="place">Charleston, Illinois</div>
+
+  <div class="wrap">
+    <div class="hero">
+      <h1>Pair a TV</h1>
+      <p>This page links the Vesper app on your TV to your trial account. It works with the same trial token as the chat tile on the home page and the phone app. Your token is kept in this page's memory for this visit only. It is never stored and never sent anywhere except to Vesper's own service.</p>
+      <p style="margin-top:14px"><a href="index.html">Back to the home page</a> &middot; <a href="vesper.html">About Vesper</a></p>
+    </div>
+
+    <section>
+      <h2>Your trial token</h2>
+      <div class="entry">
+        <p>Enter your trial token once, then use either pairing method below.</p>
+        <div class="pair-row">
+          <input type="password" id="pairToken" placeholder="Your trial token" autocomplete="off" aria-label="Your trial token" size="36">
+        </div>
+        <p class="pair-msg" id="tokenMsg"></p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Get a code to type on your TV</h2>
+      <div class="entry">
+        <p>Ask for a fresh code here, then type it into the app on your TV where it asks for a code from the sign-in page. The code works for ten minutes and can be used once.</p>
+        <div class="pair-row">
+          <button id="createBtn" type="button">Get a code</button>
+        </div>
+        <div class="big-code" id="createdCode" hidden></div>
+        <p class="pair-msg" id="createMsg"></p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Use the code your TV is showing</h2>
+      <div class="entry">
+        <p>If the app on your TV is already showing a code, type it here instead. Linking it signs that TV in as you.</p>
+        <div class="pair-row">
+          <input type="text" id="claimCode" class="code" placeholder="1234-5678" autocomplete="off" aria-label="The code shown on your TV">
+          <button id="claimBtn" type="button">Link this TV</button>
+        </div>
+        <p class="pair-msg" id="claimMsg"></p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Notes</h2>
+      <div class="entry">
+        <p>A linked TV speaks with Vesper as you, with your own memory and your own conversation, the same as the phone app. A TV linked with a trial token stops working when that trial token expires. You can link more than one TV with the same token.</p>
+        <p>No token yet? Trial places are by invitation. Email <a href="mailto:support@eidonlabsinc.com?subject=Vesper%20trial">support@eidonlabsinc.com</a> with the subject "Vesper trial" and your name, and we will write back with your trial token.</p>
+      </div>
+    </section>
+
+    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved. &middot; <a href="index.html">Home</a> &middot; <a href="privacy.html">Privacy</a></footer>
+  </div>
+<script>
+(function(){
+  var base = 'https://vesper-eidon-labs.fly.dev';
+  function el(id){ return document.getElementById(id); }
+  function token(){
+    return el('pairToken').value.trim();
+  }
+  function refuse(msgEl, status, data){
+    if(status === 401){
+      if(data && data.error === 'token_expired'){
+        msgEl.textContent = 'That trial token has expired. Email support@eidonlabsinc.com and we will sort it out.';
+      } else {
+        msgEl.textContent = 'That token was not accepted. Check it and try again.';
+      }
+    } else if(data && data.error){
+      msgEl.textContent = data.error;
+    } else {
+      msgEl.textContent = 'Vesper could not be reached just now. Try again in a moment.';
+    }
+    msgEl.className = 'pair-msg err';
+  }
+  function call(path, body, msgEl, done){
+    var t = token();
+    if(!t){
+      msgEl.textContent = 'Enter your trial token above first.';
+      msgEl.className = 'pair-msg err';
+      return;
+    }
+    fetch(base + path, {
+      method: 'POST',
+      headers: {'Authorization': 'Bearer ' + t, 'Content-Type': 'application/json'},
+      body: JSON.stringify(body || {})
+    }).then(function(r){
+      return r.json().then(function(data){ return {status: r.status, data: data}; });
+    }).then(function(res){
+      if(res.status === 200){ done(res.data); }
+      else { refuse(msgEl, res.status, res.data); }
+    }).catch(function(){
+      msgEl.textContent = 'Vesper could not be reached just now. Try again in a moment.';
+      msgEl.className = 'pair-msg err';
+    });
+  }
+  el('createBtn').addEventListener('click', function(){
+    var msg = el('createMsg');
+    var btn = el('createBtn');
+    btn.disabled = true;
+    msg.textContent = 'Asking Vesper for a code...';
+    msg.className = 'pair-msg';
+    call('/pairing/create', {device: 'web'}, msg, function(data){
+      var box = el('createdCode');
+      box.textContent = data.code;
+      box.hidden = false;
+      msg.textContent = 'Type this code on your TV. It works for ten minutes and can be used once.';
+      msg.className = 'pair-msg';
+      btn.disabled = false;
+    });
+    setTimeout(function(){ btn.disabled = false; }, 4000);
+  });
+  el('claimBtn').addEventListener('click', function(){
+    var msg = el('claimMsg');
+    var code = el('claimCode').value.trim();
+    if(!code){
+      msg.textContent = 'Type the code your TV is showing first.';
+      msg.className = 'pair-msg err';
+      return;
+    }
+    msg.textContent = 'Linking...';
+    msg.className = 'pair-msg';
+    call('/pairing/claim', {code: code}, msg, function(){
+      msg.textContent = 'That TV is linked to your account. The app on the TV will sign itself in as you.';
+      msg.className = 'pair-msg';
+    });
+  });
+})();
+</script>
+</body>
+</html>
