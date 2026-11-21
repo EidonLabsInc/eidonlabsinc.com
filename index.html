@@ -851,11 +851,11 @@
   var el = document.getElementById('vcCount');
   if (!el) return;
   try {
-    fetch('https://api.counterapi.dev/v1/eidonlabsinc/vc/up', {cache: 'no-store'}).then(function(r){
+    fetch('https://abacus.jasoncameron.dev/hit/eidonlabsinc/vc-main', {cache: 'no-store'}).then(function(r){
       if (!r || !r.ok) return null;
       return r.json();
     }).then(function(data){
-      if (data && typeof data.count === 'number') el.textContent = data.count;
+      if (data && typeof data.value === 'number') el.textContent = data.value;
     }).catch(function(){});
   } catch (e) {}
 })();
