@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Showing the Work: Vesper's Engine Test - Eidon Labs Inc</title>
+  <meta name="description" content="An update on Vesper's engine testing: a fail-closed engine that refuses rather than guesses, the resolver round authorized today, and the bar we set in public before the results exist.">
+  <link rel="icon" href="logo.jpg">
+  <meta property="og:title" content="Showing the Work: Vesper's Engine Test - Eidon Labs Inc">
+  <meta property="og:description" content="Vesper's new answering engine refuses rather than guesses. Today we authorized the next round of work, and we state what we expect before the results exist.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://eidonlabsinc.com/blog-vesper-engine-testing-update.html">
+  <meta property="og:image" content="https://eidonlabsinc.com/eidon-labs-projects-banner-testing-2026-11-25.jpg">
+<style>
+  :root{
+    --ink:#1d2530; --muted:#5b6673; --accent:#b34a12; --line:#e4e8ed; --card:#f7f8fa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background-color:#fff;line-height:1.65;background-image:linear-gradient(to bottom, rgba(255,255,255,0) 24%, rgba(255,255,255,.72) 44%, #ffffff 64%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%232ea86f' stroke-opacity='0.34'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%232ea86f' stroke-opacity='0.34'/%3E%3C/svg%3E")}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  .banner{background:#02081a}
+  .banner img{width:100%;height:clamp(118px,32vw,430px);object-fit:cover;object-position:center 40%;display:block}
+  .place{background:#02081a;text-align:center;font-size:12px;color:#8d99a8;letter-spacing:.22em;text-transform:uppercase;padding:0 24px 16px}
+  .hero{padding:64px 0 8px}
+  .hero h1{font-size:32px;line-height:1.25;margin:0 0 14px;font-weight:700}
+  .hero p{font-size:17px;color:var(--muted);margin:0;max-width:660px}
+  .meta{color:var(--muted);font-size:13px;letter-spacing:.05em;margin:0 0 10px}
+  section{padding:36px 0}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+  .entry p{margin:0 0 14px;max-width:700px}
+  .entry ul{margin:0 0 14px;padding-left:20px;max-width:700px}
+  .entry li{margin-bottom:6px}
+  .entry figure{margin:0 0 18px;max-width:700px}
+  .entry figure img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px}
+  .entry figcaption{color:var(--muted);font-size:13.5px;margin-top:8px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+  <div class="banner">
+    <img src="banner.jpg" alt="Eidon Labs. AI, Robotics, Advanced Innovation.">
+  </div>
+  <div class="place">Charleston, Illinois</div>
+
+  <div class="wrap">
+    <div class="hero">
+      <p class="meta">November 25, 2026 &middot; <a href="blog.html">Notes from the Founder</a></p>
+      <h1>Showing the Work: Vesper's Engine Test</h1>
+      <p>An update on Vesper's engine testing, because we believe in showing the work.</p>
+      <p style="margin-top:14px"><a href="index.html">Back to the home page</a> &middot; <a href="blog.html">More articles</a></p>
+    </div>
+
+    <section>
+      <div class="entry">
+        <p>An update on Vesper's engine testing, because we believe in showing the work.</p>
+
+        <figure>
+          <img src="eidon-labs-projects-banner-testing-2026-11-25.jpg" alt="Eidon Labs Inc. banner with the company mark and the marks of its projects, including Project Vesper.">
+          <figcaption>Eidon Labs Inc. and its projects, Vesper among them.</figcaption>
+        </figure>
+
+        <p>Vesper's new answering engine has one rule above all others: never guess. Every answer it gives must trace back to verified evidence, word for word, or it refuses and says so. Across hundreds of test questions it has never once served a wrong answer. That part works.</p>
+
+        <p>What does not work yet is how much it answers. In the last full test it answered 13 of 30 answerable questions, about 43 percent, against our own bar of 60. The largest single reason was not bad answers. It was the engine refusing before it even tried, because it could not settle which game a question was about, even when the evidence in front of it was clear.</p>
+
+        <p>So today we authorized the next round of work: teaching the engine to settle those cases when the answer is genuinely determinable, while keeping the refusal exactly as strict when a question is truly ambiguous. The test then reruns on the identical 50 questions, including trap questions designed to catch guessing, and those traps must still be refused.</p>
+
+        <p>What we expect, stated plainly before the results exist: coverage at or above 60 percent of answerable questions, accuracy still perfect, and zero wrong answers tolerated. If it passes, the road opens to the decision paper on integrating this engine into Vesper. If it fails, we publish that too, and decide on the full evidence.</p>
+
+        <p>That is how a small lab earns trust: set the bar in public, then show the result either way.</p>
+      </div>
+    </section>
+
+    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved. &middot; <a href="index.html">Home</a> &middot; <a href="blog.html">Blog</a> &middot; <a href="privacy.html">Privacy</a></footer>
+  </div>
+</body>
+</html>
