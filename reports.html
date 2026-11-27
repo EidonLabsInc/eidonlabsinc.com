@@ -81,7 +81,14 @@
       <h2>Members shelf</h2>
       <div class="post">
         <p class="p-note" style="max-width:680px">Behind the public reports sit the complete data packs: full run logs, file hashes, endurance data, and gate logs, more than a summary page can carry. The members shelf holds those packs for trial members, reached with the same token a member uses to talk with Vesper.</p>
-        <p class="p-note" style="max-width:680px;margin-top:10px">The shelf is being stood up now. Its first pack, the complete Project Scorpio measurement record, is in preparation, and the Erd&#337;s rung packs will follow as each rung is verified. When the shelf opens, this section will carry the token entry and the full pack list.</p>
+        <p class="p-note" style="max-width:680px;margin-top:10px">The shelf is open. Its first pack is the complete Project Scorpio measurement record, and the Erd&#337;s rung packs will follow as each rung is verified. Enter your trial token below to see the packs on the shelf and download them. Your token goes only to our own service and is not stored by this page.</p>
+        <div style="margin-top:14px;max-width:680px">
+          <label for="shelfToken" style="display:block;font-size:13px;font-weight:600;margin:0 0 4px">Your trial token</label>
+          <input type="text" id="shelfToken" autocomplete="off" style="width:100%;box-sizing:border-box;border:1px solid #c9d6e6;border-radius:6px;padding:10px;font-size:14.5px;font-family:inherit;background:#fff">
+          <button type="button" id="shelfGo" style="margin-top:10px;background:#12233d;color:#fff;border:0;border-radius:8px;padding:11px 20px;font-size:14.5px;font-weight:600;cursor:pointer">Show the shelf</button>
+          <p id="shelfMsg" class="p-note" style="margin-top:12px"></p>
+          <div id="shelfList"></div>
+        </div>
       </div>
     </section>
 
@@ -133,5 +140,68 @@
 
     <footer>&copy; 2026 Eidon Labs Inc. All rights reserved. &middot; <a href="index.html">Home</a> &middot; <a href="blog.html">Blog</a> &middot; <a href="https://github.com/EidonLabsInc">GitHub</a> &middot; <a href="https://www.facebook.com/joshua.henne.2025">Facebook</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a></footer>
   </div>
+<script>
+(function(){
+  var btn = document.getElementById('shelfGo');
+  if(!btn) return;
+  var base = 'https://vesper-eidon-labs.fly.dev';
+  function msg(t){ document.getElementById('shelfMsg').textContent = t; }
+  function fmtSize(n){ if(n >= 1048576) return (n/1048576).toFixed(1) + ' MB'; if(n >= 1024) return (n/1024).toFixed(1) + ' KB'; return n + ' bytes'; }
+  btn.addEventListener('click', function(){
+    var token = document.getElementById('shelfToken').value.trim();
+    var list = document.getElementById('shelfList');
+    list.innerHTML = '';
+    if(!token){ msg('Enter your trial token first.'); return; }
+    msg('Checking the shelf...');
+    btn.disabled = true;
+    fetch(base + '/packs', {headers: {'Authorization': 'Bearer ' + token}})
+    .then(function(r){
+      if(r.status === 401){ msg('That token was not accepted. Check it and try again, or write to support@eidonlabsinc.com.'); return null; }
+      if(!r.ok){ msg('The shelf did not answer just now. Please try again in a moment.'); return null; }
+      return r.json();
+    })
+    .then(function(data){
+      if(!data) return;
+      var packs = data.packs || data;
+      if(!packs.length){ msg('The shelf is empty right now.'); return; }
+      msg('The shelf holds ' + packs.length + (packs.length === 1 ? ' pack.' : ' packs.'));
+      packs.forEach(function(p){
+        var d = document.createElement('div');
+        d.style.cssText = 'border-top:1px solid #e4e8ed;padding:14px 0';
+        var h = document.createElement('p');
+        h.style.cssText = 'margin:0 0 4px;font-size:16px;font-weight:600';
+        h.textContent = p.title || p.id;
+        var meta = document.createElement('p');
+        meta.className = 'p-note';
+        meta.textContent = (p.date ? p.date + ' \u00b7 ' : '') + fmtSize(p.size_bytes || 0) + (p.sha256 ? ' \u00b7 SHA-256 ' + String(p.sha256).slice(0, 12) + '\u2026' : '');
+        var desc = document.createElement('p');
+        desc.className = 'p-note';
+        desc.textContent = p.description || '';
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = 'Download this pack';
+        b.style.cssText = 'margin-top:8px;background:#12233d;color:#fff;border:0;border-radius:8px;padding:9px 16px;font-size:13.5px;font-weight:600;cursor:pointer';
+        b.addEventListener('click', function(){
+          b.disabled = true; b.textContent = 'Downloading...';
+          fetch(base + '/packs/' + encodeURIComponent(p.id), {headers: {'Authorization': 'Bearer ' + token}})
+          .then(function(r){ if(!r.ok) throw new Error('bad'); return r.blob(); })
+          .then(function(blob){
+            var a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = p.id + '.zip';
+            document.body.appendChild(a); a.click(); a.remove();
+            b.textContent = 'Downloaded';
+          })
+          .catch(function(){ b.disabled = false; b.textContent = 'Download this pack'; msg('That download did not go through. Please try again.'); });
+        });
+        d.appendChild(h); d.appendChild(meta); if(p.description) d.appendChild(desc); d.appendChild(b);
+        list.appendChild(d);
+      });
+    })
+    .catch(function(){ msg('The shelf could not be reached just now. Please try again in a moment.'); })
+    .then(function(){ btn.disabled = false; });
+  });
+})();
+</script>
 </body>
 </html>
