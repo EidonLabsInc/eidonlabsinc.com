@@ -652,6 +652,43 @@
     ctx.drawImage(sprites[ci], x-radius, y-radius, radius*2, radius*2);
   }
 
+  /* Name sweep: a band of light that travels left to right across the
+     EIDON LABS wordmark every few seconds, like the shine pass on the
+     animated logo. Clipped to the wordmark region of the artwork and
+     mapped through the same cover transform as the sparkles. */
+  var NAME = {x0:0.225, x1:0.775, y0:0.345, y1:0.565};
+  var sweep = null, nextSweepAt = 0;
+  function drawSweep(now){
+    if (!sweep && now >= nextSweepAt){
+      sweep = {t0:now, dur:1500};
+      nextSweepAt = now + 5200 + Math.random()*2600;
+    }
+    if (!sweep) return;
+    var p = (now - sweep.t0)/sweep.dur;
+    if (p >= 1){ sweep = null; return; }
+    var e = p<0.5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2;
+    var env = Math.sin(Math.PI*p);
+    var x0 = mapX(NAME.x0)*view.dpr, x1 = mapX(NAME.x1)*view.dpr;
+    var y0 = mapY(NAME.y0)*view.dpr, y1 = mapY(NAME.y1)*view.dpr;
+    var head = x0 + (x1-x0)*e;
+    var band = (x1-x0)*0.14;
+    ctx.save();
+    ctx.beginPath();
+    ctx.rect(x0, y0, x1-x0, y1-y0);
+    ctx.clip();
+    var grad = ctx.createLinearGradient(head-band, y0, head+band, y1);
+    grad.addColorStop(0, 'rgba(168,224,255,0)');
+    grad.addColorStop(0.42, 'rgba(168,224,255,0.20)');
+    grad.addColorStop(0.5, 'rgba(255,246,224,0.60)');
+    grad.addColorStop(0.58, 'rgba(168,224,255,0.20)');
+    grad.addColorStop(1, 'rgba(168,224,255,0)');
+    ctx.globalAlpha = 0.9*env;
+    ctx.fillStyle = grad;
+    ctx.fillRect(head-band*1.4, y0, band*2.8, y1-y0);
+    ctx.restore();
+    ctx.globalAlpha = 1;
+  }
+
   /* Travelling pulses between two network nodes. */
   var pulse = null, nextPulseAt = 0;
   function startPulse(now){
@@ -713,6 +750,7 @@
         drawGlow(px*view.dpr, py*view.dpr, 2.4*scaleR*view.dpr, pulse.ci, 0.95);
       }
     }
+    drawSweep(now);
     ctx.globalAlpha = 1;
     ctx.globalCompositeOperation = 'source-over';
     requestAnimationFrame(frame);
@@ -756,6 +794,7 @@
     setup();
     if (!reduced){
       nextPulseAt = performance.now() + 1800;
+      nextSweepAt = performance.now() + 2600;
       requestAnimationFrame(frame);
       glanceTimer = setTimeout(glance, 7000 + Math.random()*3000);
     }
