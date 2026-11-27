@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The computer that would not restart - Eidon Labs Inc</title>
+<meta name="description" content="A client's PC kept failing to restart until he had to clear the BIOS to get it back. Its own logs told the whole story. What we found, what we fixed, and why your computer's diary matters.">
+<link rel="icon" href="logo.jpg">
+<meta property="og:title" content="The computer that would not restart - Eidon Labs Inc">
+<meta property="og:description" content="A client's PC kept failing to restart until he had to clear the BIOS to get it back. Its own logs told the whole story. What we found, what we fixed, and why your computer's diary matters.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eidonlabsinc.com/blog-computer-would-not-restart.html">
+<meta property="og:image" content="https://eidonlabsinc.com/banner.jpg">
+<style>
+  :root{
+    --ink:#1d2530; --muted:#5b6673; --accent:#b34a12; --line:#e4e8ed; --card:#f7f8fa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background-color:#fff;line-height:1.65;background-image:linear-gradient(to bottom, rgba(255,255,255,0) 24%, rgba(255,255,255,.72) 44%, #ffffff 64%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%232ea86f' stroke-opacity='0.34'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%232ea86f' stroke-opacity='0.34'/%3E%3C/svg%3E")}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  .banner{background:#02081a}
+  .banner img{width:100%;height:clamp(118px,32vw,430px);object-fit:cover;object-position:center 40%;display:block}
+  .place{background:#02081a;text-align:center;font-size:12px;color:#8d99a8;letter-spacing:.22em;text-transform:uppercase;padding:0 24px 16px}
+  .hero{padding:64px 0 8px}
+  .hero h1{font-size:32px;line-height:1.25;margin:0 0 14px;font-weight:700}
+  .hero p{font-size:17px;color:var(--muted);margin:0;max-width:660px}
+  .meta{color:var(--muted);font-size:13px;letter-spacing:.05em;margin:0 0 10px}
+  section{padding:36px 0}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+  .entry p{margin:0 0 14px;max-width:700px}
+  .entry ul{margin:0 0 14px;padding-left:20px;max-width:700px}
+  .entry li{margin-bottom:6px}
+  .entry figure{margin:0 0 18px;max-width:700px}
+  .entry figure img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px}
+  .entry figcaption{color:var(--muted);font-size:13.5px;margin-top:8px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+  <div class="banner">
+    <img src="banner.jpg" alt="Eidon Labs. AI, Robotics, Advanced Innovation.">
+  </div>
+  <div class="place">Charleston, Illinois</div>
+
+  <div class="wrap">
+    <div class="hero">
+      <p class="meta">November 26, 2026 &middot; <a href="blog.html">Notes from the Founder</a></p>
+      <h1>The computer that would not restart</h1>
+      <p>A client told us his computer sometimes refused to restart, and the only way back was to clear the BIOS and start over. So we read the machine's diary.</p>
+      <p style="margin-top:14px"><a href="index.html">Back to the home page</a> &middot; <a href="blog.html">More articles</a></p>
+    </div>
+
+    <section>
+      <div class="entry">
+        <p>Every Windows computer keeps a log of its own life: every start, every shutdown, every error, written down with timestamps whether anyone reads it or not. Most faults people describe as random are sitting in that log with a date and a cause. This one was.</p>
+        <p>The log showed a pattern across three weeks: four occasions where the machine had gone down dirty, never finishing its shutdown, and at the same minutes, errors from the controller that runs its solid state drive. A restart asks a lot of that controller. The drive would stumble at exactly the moment the machine needed it most, and the next start would fail until the settings were cleared by hand.</p>
+        <p>The board in that machine was running early firmware, the first release from when the board was new. The manufacturer's later firmware notes addressed, in so many words, boot failures on configurations like his and problems training large memory kits like his. His memory kit is large.</p>
+        <p>Here is what we did. First, we turned off a power saving setting that lets the drive's connection sleep, a known troublemaker with this class of fault, and verified the change held. Second, we prepared the current firmware update, checked its fingerprint against the manufacturer's published one, and staged it on his desktop with plain instructions for the one part that has to be done by hand at the machine itself, about fifteen minutes at his convenience. Third, his machine is now watched by our desk, so if it ever goes down dirty again, we will know the same quarter hour it happens instead of three weeks later.</p>
+        <p>The lesson is not really about firmware. It is that your computer has been keeping notes on its own health all along, and almost nobody reads them. A good support desk reads them first and guesses never.</p>
+        <p>If your machine has a habit you have learned to live with, a restart that fails, a start that takes forever, a fan that runs for no reason, it is probably already written down. Our <a href="pc-health-check.html">free PC health check</a> reads those logs and hands you a plain one-page report. What our <a href="msp.html">care plans</a> add is a desk that keeps reading them, every day, so the next fault is a message from us and not a morning lost.</p>
+      </div>
+    </section>
+
+    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved. &middot; <a href="index.html">Home</a> &middot; <a href="msp.html">Managed IT Services</a> &middot; <a href="privacy.html">Privacy</a></footer>
+  </div>
+</body>
+</html>
