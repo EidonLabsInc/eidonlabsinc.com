@@ -35,6 +35,14 @@
   .entry ul{margin:0 0 12px;padding-left:20px;max-width:700px}
   .entry li{margin-bottom:6px}
   .entry h4{margin:18px 0 8px;font-size:16px}
+  form.consult{border:1px solid var(--line);border-radius:12px;padding:22px;background:var(--card);max-width:700px}
+  form.consult label{display:block;font-size:13px;font-weight:600;margin:0 0 4px}
+  form.consult input,form.consult select,form.consult textarea{width:100%;border:1px solid #c9d6e6;border-radius:6px;padding:10px;font-size:14.5px;margin:0 0 14px;font-family:inherit;background:#fff}
+  form.consult textarea{height:96px;resize:vertical}
+  form.consult button{background:#12233d;color:#fff;border:0;border-radius:8px;padding:12px 22px;font-size:15px;font-weight:600;cursor:pointer;width:100%}
+  form.consult button:hover{background:#1a3157}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  #trialDone{display:none;border:1px solid #bfe3c8;background:#eefaf1;border-radius:12px;padding:18px 22px;max-width:700px}
   a{color:var(--accent);text-decoration:none}
   a:hover{text-decoration:underline}
   footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--muted);font-size:13px}
@@ -63,10 +71,22 @@
     </section>
 
     <section>
+      <h2>Price and trial</h2>
+      <div class="entry">
+        <p>Nothing is sold yet. Vesper is in trial today, by invitation token, and her Xbox version is in development. The planned prices, settled in November 2026 and to be sold through the Microsoft Store when the Xbox version opens, are:</p>
+        <ul>
+          <li><strong>Chat: $4.99 a month.</strong></li>
+          <li><strong>Chat plus game assist: $9.99 a month</strong>, with a one week free trial of the full version through Microsoft's own system.</li>
+        </ul>
+        <p>These are planned prices for a product that does not exist yet, and planned prices and features may change before anything is sold.</p>
+      </div>
+    </section>
+
+    <section>
       <h2>How she is built</h2>
       <div class="entry">
         <ul>
-          <li><strong>Service and app.</strong> The live service stands at version 0.5.34 and the Android app at version 0.4.5, as of November 19, 2026. The service is hosted for us and reached from the phone app and from the chat tile on this site.</li>
+          <li><strong>Service and app.</strong> The live service stands at version 0.5.54 and the Android app at version 0.4.5, as of November 26, 2026. The service is hosted for us and reached from the phone app and from the chat tile on this site.</li>
           <li><strong>Her brain.</strong> She runs on the Qwen3-30B-A3B language model. Larger models have been trialed against her test battery, most recently an 80 billion and a 235 billion parameter model on November 19, 2026. The 235 billion model failed its proof run outright. The 80 billion model scored well in its trial and was not adopted. She stands on the 30B because it is the model that has carried her live service, and our standing rule returns her to it whenever a trial does not earn the seat outright.</li>
           <li><strong>Memory.</strong> Each person's facts are filed per person, in the teller's own words, through a narrow door that accepts plain standing facts about the teller and nothing else. A fact one person tells her is never served to another.</li>
           <li><strong>Her library.</strong> Her reading library is live, built on the Project Gutenberg catalog of 79,827 books, fetched on demand. She also keeps a study program: set topics she reads up on and files, so her knowledge grows between conversations.</li>
@@ -91,11 +111,11 @@
     <section>
       <h2>Measured state today</h2>
       <div class="entry">
-        <p class="meta">November 19, 2026</p>
+        <p class="meta">Updated November 26, 2026</p>
         <ul>
-          <li><strong>Battery: 22 of 29</strong> on the current build, service 0.5.34. Her standing mark is 27 of 29, set on an earlier build. The current build is below the mark, and we say so here because the number is the point of publishing it.</li>
-          <li><strong>Test loop, latest rounds:</strong> rounds 11 and 12 of the half hour loop each scored 2 of 5. She is reliable on the trap shapes: asked about a fifth mission with no name, she asks which mission; handed a false premise, she corrects it. She is weakest on long walkthroughs and on current state details.</li>
-          <li><strong>Cost:</strong> her metered running cost for November stood at $0.68 across 2,068 turns at the November 19, 2026 count.</li>
+          <li><strong>Battery: 22 of 29</strong>, measured on service 0.5.34 on November 19, 2026. Her standing mark is 27 of 29, set on an earlier build. That build was below the mark, and we say so here because the number is the point of publishing it. The live service now stands at 0.5.54 and the battery has not been re-run against it, so this stands as a dated measurement, not a current score.</li>
+          <li><strong>Test loop:</strong> the half hour loop ran 151 rounds in all. Its last two rounds, run on November 22, 2026, each scored 2 of 5. The loop is paused for now; by the Founder's standing order, it restarts only after a fix is proven live.</li>
+          <li><strong>Cost:</strong> her metered running cost for November stood at $1.64 across 4,185 turns at the November 26, 2026 count.</li>
         </ul>
         <h4>The fault classes we are still fighting, named plainly</h4>
         <ul>
@@ -120,6 +140,49 @@
     </section>
 
     <section>
+      <h2>Questions people ask</h2>
+      <div class="entry">
+        <h4>What is Vesper?</h4>
+        <p>An AI companion: a conversational partner with her own memory, her own library, and a specialty in helping players with the games they are playing. Conversation comes first.</p>
+        <h4>Does she remember me?</h4>
+        <p>Yes. What you tell her is filed in your own private memory, in your own words, one file per person. A fact one person tells her is never served to another.</p>
+        <h4>Where can I use her?</h4>
+        <p>On phones today, in the Android app, and in the chat tile on our home page. Trial members who run the TV build can link it to their account on the <a href="pair.html">Pair a TV</a> page. An Xbox version is in development; it does not exist as a product yet.</p>
+        <h4>How does the trial work?</h4>
+        <p>Trial places are by invitation token. The same token works in the phone app and in the chat tile on our home page. To ask for an invitation, use the form below, or email <a href="mailto:support@eidonlabsinc.com?subject=Vesper%20trial">support@eidonlabsinc.com</a> with the subject "Vesper trial" and your name.</p>
+        <h4>What does she cost?</h4>
+        <p>Nothing is sold yet. The planned Xbox prices are $4.99 a month for chat and $9.99 a month for chat plus game assist, with a one week free trial of the full version through Microsoft's own system. Planned prices may change before anything is sold.</p>
+        <h4>What happens to my memory if my trial ends, or if I cancel one day?</h4>
+        <p>When a trial ends, the record is deleted. If a paid subscription is one day cancelled, the record is kept for thirty days, against an accidental cancellation, and then deleted.</p>
+        <h4>Is what I tell her private?</h4>
+        <p>Your memory is yours, and it is never shown to another person. We never sell personal information, and we never use conversations for advertising or profiling. Our <a href="privacy.html">Privacy</a> page says, in plain words, what we collect and what we never do.</p>
+        <h4>Is she a professional?</h4>
+        <p>No. She is a companion, not a professional. Nothing she says is medical, legal, or financial advice.</p>
+      </div>
+    </section>
+
+    <section id="trial">
+      <h2>Ask for a trial invitation</h2>
+      <div class="entry">
+        <p>Trial places are by invitation. Tell us your name and how to reach you, and we will write back with your trial token when a place opens. A person reads every request.</p>
+        <form class="consult" id="trialForm">
+          <label for="tName">Your name</label>
+          <input type="text" id="tName" autocomplete="name">
+          <label for="tContact">Email or phone, so we can reply</label>
+          <input type="text" id="tContact" autocomplete="email">
+          <label for="tMsg">Anything you want us to know</label>
+          <textarea id="tMsg"></textarea>
+          <span class="hp"><input type="text" id="tCompany" tabindex="-1" autocomplete="off" aria-hidden="true"></span>
+          <button type="button" id="tSend">Request a trial invitation</button>
+        </form>
+        <div id="trialDone">
+          <p style="margin:0"><strong>Thank you.</strong> Your request is on its way to our team. We will write back when a trial place opens. You can also email <a href="mailto:support@eidonlabsinc.com?subject=Vesper%20trial">support@eidonlabsinc.com</a> with the subject "Vesper trial".</p>
+        </div>
+        <p style="margin-top:14px">Prefer email? Write to <a href="mailto:support@eidonlabsinc.com?subject=Vesper%20trial">support@eidonlabsinc.com</a> with the subject "Vesper trial" and your name.</p>
+      </div>
+    </section>
+
+    <section>
       <h2>Limits and open questions</h2>
       <div class="entry">
         <ul>
@@ -133,7 +196,7 @@
       </div>
     </section>
 
-    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved. &middot; <a href="index.html">Home</a> &middot; <a href="reports.html">Reports</a> &middot; <a href="https://github.com/EidonLabsInc">GitHub</a> &middot; <a href="privacy.html">Privacy</a></footer>
+    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved. &middot; <a href="index.html">Home</a> &middot; <a href="reports.html">Reports</a> &middot; <a href="https://github.com/EidonLabsInc">GitHub</a> &middot; <a href="https://www.facebook.com/joshua.henne.2025">Facebook</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a></footer>
   </div>
 
 <style>
@@ -221,6 +284,34 @@
       else { add('That did not go through. You can also email support@eidonlabsinc.com.', 'd-b'); }
     }).catch(function(){
       add('That did not go through. You can also email support@eidonlabsinc.com.', 'd-b');
+    }).then(function(){ btn.disabled = false; });
+  });
+})();
+</script>
+<script>
+(function(){
+  var btn = document.getElementById('tSend');
+  if(!btn) return;
+  btn.addEventListener('click', function(){
+    var name = document.getElementById('tName').value.trim();
+    var contact = document.getElementById('tContact').value.trim();
+    var msg = document.getElementById('tMsg').value.trim();
+    if(!name || !contact){ alert('Please give us your name and an email or phone so we can reply.'); return; }
+    var full = 'Vesper trial invitation request. ' + msg;
+    btn.disabled = true;
+    fetch('https://vesper-eidon-labs.fly.dev/contact', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({name: name, contact: contact, message: full, company: document.getElementById('tCompany').value})
+    }).then(function(r){
+      if(r.ok){
+        document.getElementById('trialForm').style.display = 'none';
+        document.getElementById('trialDone').style.display = 'block';
+      } else {
+        window.location.href = 'mailto:support@eidonlabsinc.com?subject=Vesper%20trial&body=' + encodeURIComponent(full + ' (from ' + name + ', ' + contact + ')');
+      }
+    }).catch(function(){
+      window.location.href = 'mailto:support@eidonlabsinc.com?subject=Vesper%20trial&body=' + encodeURIComponent(full + ' (from ' + name + ', ' + contact + ')');
     }).then(function(){ btn.disabled = false; });
   });
 })();

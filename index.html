@@ -11,7 +11,27 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://eidonlabsinc.com/">
   <meta property="og:image" content="https://eidonlabsinc.com/banner.jpg">
-<meta name="description" content="Eidon Labs Inc is a software and artificial intelligence research company in Charleston, Illinois. We build Vesper, an AI companion, and tools for verifying investment performance claims.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "Eidon Labs Inc",
+      "url": "https://eidonlabsinc.com/",
+      "logo": "https://eidonlabsinc.com/logo.jpg",
+      "email": "support@eidonlabsinc.com",
+      "address": {"@type": "PostalAddress", "addressLocality": "Charleston", "addressRegion": "IL", "addressCountry": "US"},
+      "sameAs": ["https://github.com/EidonLabsInc", "https://www.facebook.com/joshua.henne.2025"]
+    },
+    {
+      "@type": "WebSite",
+      "name": "Eidon Labs Inc",
+      "url": "https://eidonlabsinc.com/"
+    }
+  ]
+}
+</script>
 <style>
   :root{
     --ink:#1d2530; --muted:#5b6673; --accent:#b34a12; --line:#e4e8ed;
@@ -41,6 +61,12 @@
   .hero{padding:64px 0 8px}
   .hero h1{font-size:34px;line-height:1.25;margin:0 0 16px;font-weight:700}
   .hero p{font-size:17px;color:var(--muted);margin:0;max-width:640px}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:30px 0 2px}
+  a.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:block;text-decoration:none;color:inherit}
+  a.stat:hover{border-color:#9fb6d4;box-shadow:0 4px 16px rgba(18,35,61,.14)}
+  .stat .num{display:block;font-size:25px;font-weight:700;line-height:1.2;color:var(--ink)}
+  .stat .lbl{display:block;margin-top:5px;font-size:13.5px;color:var(--muted);line-height:1.45}
+  @media (max-width:820px){.stats{grid-template-columns:1fr 1fr}}
   section{padding:36px 0}
   h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
   .cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px;position:relative;left:50%;transform:translateX(-50%);width:min(1500px,calc(100vw - 48px))}
@@ -134,8 +160,15 @@
 
   <div class="wrap">
     <div class="hero">
-      <h1>Software and artificial intelligence research.</h1>
-      <p>Eidon Labs Inc is a software and AI research company based in Charleston, Illinois. We build AI companions people can talk with, and tools that check claims against the record of what actually happened.</p>
+      <h1>An AI companion, machine checked research, honest audits, and computer care for our neighbors.</h1>
+      <p>Eidon Labs Inc is a small company in Charleston, Illinois, and everything we build is checked against the record before we claim it. Vesper is our AI companion for conversation and game help, in trial on phones today. Our proof lab works on open mathematics problems and publishes proofs checked by machine. AlphaAudit rebuilds trading track records and gives a plain verdict. And our managed IT service looks after home and business computers across central Illinois.</p>
+    </div>
+
+    <div class="stats">
+      <a class="stat" href="research.html"><span class="num">99.7 tok/s</span><span class="lbl">Local inference measured on a retail Xbox Series X</span></a>
+      <a class="stat" href="blog-erdos-7-first-rung.html"><span class="num">Above 10,000</span><span class="lbl">The lcm floor for Erd&#337;s Problem #7, kernel checked in Lean</span></a>
+      <a class="stat" href="alphaaudit.html"><span class="num">$179,000</span><span class="lbl">Loss found in AlphaAudit's first public audit</span></a>
+      <a class="stat" href="vesper.html"><span class="num">25 games</span><span class="lbl">In Vesper's deployed knowledge packs</span></a>
     </div>
 
     <section>
@@ -294,7 +327,7 @@
 
     <section>
       <h2>Updates</h2>
-      <p style="margin:0 0 18px;color:var(--muted);max-width:680px">Our public posts, gathered in one place. Each one links to the original, where it was posted.</p>
+      <p style="margin:0 0 18px;color:var(--muted);max-width:680px">Our latest public posts. Each one links to the original, where it was posted. The full list lives on <a href="blog.html#updates">the blog page</a>.</p>
 
       <div class="update">
         <p class="u-date">November 20, 2026 &middot; This site</p>
@@ -311,89 +344,18 @@
         <a class="u-title" href="blog-where-vesper-stands.html">Where Vesper stands: GTA 6 live, and a day of building</a>
         <p class="u-note">A new note from the founder: Vesper's GTA 6 help is live and tested, verified walkthroughs and builds are going in across the games people play all day, and she is gaining a reader that gathers only where a site's own terms allow it.</p>
       </div>
-      <div class="update">
-        <p class="u-date">November 20, 2026 &middot; This site</p>
-        <a class="u-title" href="blog-gta6-verified-not-fast.html">A note on GTA 6: verified, not fast</a>
-        <p class="u-note">A new note from the founder: Vesper's GTA 6 help is being built from real players' verified work, honestly and without cheats, hacks, or leaked secrets, the same rule as every game she covers.</p>
-      </div>
-      <div class="update">
-        <p class="u-date">November 20, 2026 &middot; This site</p>
-        <a class="u-title" href="blog.html">Notes from the Founder: our blog is open</a>
-        <p class="u-note">A home on this site for the company's articles and thoughts, opening with two pieces: an AI companion for Xbox, built to remember you, and memory you can read.</p>
-      </div>
-      <div class="update">
-        <p class="u-date">November 19, 2026 &middot; GitHub</p>
-        <a class="u-title" href="https://github.com/gianlucamazza/xllama/discussions/502#discussioncomment-19764302">The company site, announced where our Series X work began</a>
-        <p class="u-note">Eidon Labs has a home on the web, announced to the xllama community on the Vesper thread.</p>
-      </div>
-      <div class="update">
-        <p class="u-date">November 19, 2026 &middot; Facebook</p>
-        <a class="u-title" href="https://facebook.com/100092316447068/posts/pfbid0ZevRKfMTXpgXm9xq6NvmWceB1GBHUr119y1yRcMwspbRutYyffdTTqqW236612Jgl/">Eidon Labs has a home on the web</a>
-        <p class="u-note">Our new site is live, built by Aletheia, our CTO, with Vesper, NeuroCore, our research, the Dream Library, and this feed.</p>
-      </div>
+      <p style="margin-top:6px"><a href="blog.html#updates">See all updates on the blog</a></p>
 
-      <div class="update">
-        <p class="u-date">November 19, 2026 &middot; Facebook</p>
-        <a class="u-title" href="https://www.facebook.com/100092316447068/posts/1090073597413178">Vesper makes her public debut on GitHub</a>
-        <p class="u-note">We told the xllama community first: we are building Vesper, an AI companion app, and bringing her to Xbox.</p>
-      </div>
-
-      <div class="update">
-        <p class="u-date">November 19, 2026 &middot; GitHub</p>
-        <a class="u-title" href="https://github.com/gianlucamazza/xllama/discussions/502">From the Series X tester: we are building an AI companion app for Xbox</a>
-        <p class="u-note">The full announcement, with what Vesper does, the planned plans, and the free week.</p>
-      </div>
-
-      <div class="update">
-        <p class="u-date">November 18, 2026 &middot; Facebook</p>
-        <a class="u-title" href="https://www.facebook.com/100092316447068/posts/1089137414173463">Eidon Labs announces Vesper for Xbox</a>
-        <p class="u-note">Our company post introducing Vesper and the Xbox program.</p>
-      </div>
-
-      <div class="update">
-        <p class="u-date">November 16, 2026 &middot; GitHub</p>
-        <a class="u-title" href="https://github.com/gianlucamazza/xllama/discussions/434">The three untested Series X paths, measured</a>
-        <p class="u-note">GPU at 99.7 tokens per second, on-console image generation, and on-device training, posted to the results thread.</p>
-      </div>
-
-      <div class="update">
-        <p class="u-date">November 15, 2026 &middot; GitHub</p>
-        <a class="u-title" href="https://github.com/gianlucamazza/xllama/pull/455">Series X accepted as supported in xllama</a>
-        <p class="u-note">The maintainer merged our Series X data with Eidon Labs credited as co-author.</p>
-      </div>
-
-      <div class="update">
-        <p class="u-date">November 13, 2026 &middot; GitHub</p>
-        <a class="u-title" href="https://github.com/gianlucamazza/xllama/discussions/434">First inference results on Xbox Series X: the field report</a>
-        <p class="u-note">The first Series X measurements ever published, posted where the project lives.</p>
-      </div>
-
-      <div class="update">
-        <p class="u-date">November 13, 2026 &middot; Hacker News</p>
-        <a class="u-title" href="https://news.ycombinator.com/item?id=50488280">Project Scorpio results on Hacker News</a>
-        <p class="u-note">The Series X paper, shared with the wider engineering community.</p>
-      </div>
-
-      <div class="update">
-        <p class="u-date">November 13, 2026 &middot; GBAtemp</p>
-        <a class="u-title" href="https://gbatemp.net/threads/first-inference-results-on-xbox-series-x-xllama-in-dev-mode-lfm2-5-350m-and-1-2b-measured.686508/">First inference results thread on GBAtemp</a>
-        <p class="u-note">The results, shared with the console homebrew community.</p>
-      </div>
-
-      <div class="update">
-        <p class="u-date">November 13, 2026 &middot; Facebook</p>
-        <a class="u-title" href="https://www.facebook.com/100092316447068/posts/1083859804701224">The Series X results, gathered in one post</a>
-        <p class="u-note">Every venue link for the first results, as they went live.</p>
-      </div>
     </section>
 
     <section class="contact">
       <h2>Contact</h2>
       <p>Email: <a href="mailto:support@eidonlabsinc.com">support@eidonlabsinc.com</a></p>
+      <p>Phone: <a href="tel:+14472887635">1-447-288-7635</a> (we are on Central Time)</p>
       <p>Charleston, Illinois, United States</p>
     </section>
 
-    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved. &middot; <a href="blog.html">Blog</a> &middot; <a href="reports.html">Reports</a> &middot; <a href="https://github.com/EidonLabsInc">GitHub</a> &middot; <a href="privacy.html">Privacy</a></footer>
+    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved. &middot; <a href="blog.html">Blog</a> &middot; <a href="reports.html">Reports</a> &middot; <a href="https://github.com/EidonLabsInc">GitHub</a> &middot; <a href="https://www.facebook.com/joshua.henne.2025">Facebook</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a></footer>
   </div>
 <script>
 (function(){
