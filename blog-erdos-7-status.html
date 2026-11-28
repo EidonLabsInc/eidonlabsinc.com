@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Erdős Problem #7: Where the Hunt Stands - Eidon Labs Inc</title>
+<meta name="description" content="Erdős Problem #7 is still open. Eidon Labs states, with receipts, what it has established: a kernel checked exclusion frontier of 400,000, an exact construction hunt running continuously, and an independent kernel replay of Schroeder's nine prime claim.">
+<link rel="icon" href="logo.jpg">
+<meta property="og:title" content="Erdős Problem #7: Where the Hunt Stands - Eidon Labs Inc">
+<meta property="og:description" content="Erdős Problem #7 is still open. Eidon Labs states, with receipts, what it has established: a kernel checked exclusion frontier of 400,000, an exact construction hunt running continuously, and an independent kernel replay of Schroeder's nine prime claim.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://eidonlabsinc.com/blog-erdos-7-status.html">
+<meta property="og:image" content="https://eidonlabsinc.com/banner.jpg">
+<style>
+  :root{
+    --ink:#1d2530; --muted:#5b6673; --accent:#b34a12; --line:#e4e8ed; --card:#f7f8fa;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background-color:#fff;line-height:1.65;background-image:linear-gradient(to bottom, rgba(255,255,255,0) 24%, rgba(255,255,255,.72) 44%, #ffffff 64%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='%232ea86f' stroke-opacity='0.34'/%3E%3Cpath d='M28 0L28 34L0 50L0 84L28 100L56 84L56 50L28 34' fill='none' stroke='%232ea86f' stroke-opacity='0.34'/%3E%3C/svg%3E")}
+  .wrap{max-width:880px;margin:0 auto;padding:0 24px}
+  .banner{background:#02081a}
+  .banner img{width:100%;height:clamp(118px,32vw,430px);object-fit:cover;object-position:center 40%;display:block}
+  .place{background:#02081a;text-align:center;font-size:12px;color:#8d99a8;letter-spacing:.22em;text-transform:uppercase;padding:0 24px 16px}
+  .hero{padding:64px 0 8px}
+  .hero h1{font-size:32px;line-height:1.25;margin:0 0 14px;font-weight:700}
+  .hero p{font-size:17px;color:var(--muted);margin:0;max-width:660px}
+  .meta{color:var(--muted);font-size:13px;letter-spacing:.05em;margin:0 0 10px}
+  section{padding:36px 0}
+  h2{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
+  .entry p{margin:0 0 14px;max-width:700px}
+  .entry ul{margin:0 0 14px;padding-left:20px;max-width:700px}
+  .entry li{margin-bottom:6px}
+  .entry figure{margin:0 0 18px;max-width:700px}
+  .entry figure img{width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:10px}
+  .entry figcaption{color:var(--muted);font-size:13.5px;margin-top:8px}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  footer{border-top:1px solid var(--line);padding:22px 0 30px;color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+  <div class="banner">
+    <img src="banner.jpg" alt="Eidon Labs. AI, Robotics, Advanced Innovation.">
+  </div>
+  <div class="place">Charleston, Illinois</div>
+
+  <div class="wrap">
+    <div class="hero">
+      <p class="meta">November 27, 2026 &middot; <a href="blog.html">Notes from the Founder</a></p>
+      <h1>Erd&#337;s Problem #7: Where the Hunt Stands</h1>
+      <p>This article states, with receipts, what Eidon Labs has established, what we are running, and what we are checking.</p>
+      <p style="margin-top:14px"><a href="index.html">Back to the home page</a> &middot; <a href="blog.html">More articles</a></p>
+    </div>
+
+    <section>
+      <div class="entry">
+        <p>In 1971 Paul Erd&#337;s and John Selfridge asked whether a finite covering system can use only distinct odd moduli: repeating patterns, every spacing odd, every spacing different, together painting every whole number. The problem is still open. This article states, with receipts, what Eidon Labs has established, what we are running, and what we are checking.</p>
+        <p>What is proven, kernel-checked. Our Lean ladder excludes every odd covering whose cycle (the least common multiple of its moduli) is at most 400,000. Each rung is a complete finite exclusion, verified by the Lean kernel on the standard axioms only. The verified frontier is a clean 400,000, and the next band, to 800,000, is under construction. For scale: the classical counting bounds that stood for decades put the floor at 945.</p>
+        <p>What is proven, on paper. Our fixed-support analysis surveyed every prime support of size up to six and found exactly one hard family, built on the primes 3, 5, 7, and 11, where the standard methods stall. We then proved, in four successive results, that the entire counting line, plain and weighted, at every group size, provably cannot finish that family. Those roads are closed, and the proofs say why.</p>
+        <p>What is running. The construction search looks for a covering directly. On a dedicated workstation, eleven exact searches run continuously: one at the largest scale, a cycle of 9,704,539,845, where our best candidate covers 94.5114 percent of the cycle, counted exactly over the full period; nine on the only smaller cycles our exclusions leave open; and an exact solver attempt on the smallest of those. Every figure the search reports is independently recounted before it enters our record. Machine computation, labeled as such; no covering has been found, and none is claimed.</p>
+        <p>What we are verifying. Michael Schroeder's 2026 preprint claims every odd distinct covering needs at least nine distinct prime divisors, which forces a cycle of at least 9,704,539,845. Our cold review recomputed his load-bearing numbers exactly, parsed his 28,001-row certificate, and scanned his Lean archive: no gaps found at any point we could test. That is not confirmation. We are replaying his full Lean development on our own kernel, all 24,633 modules, and we will publish the verdict either way. Until then we cite it as what it is: a strong, statically audited preprint.</p>
+        <p>Where that leaves the field. By verified ground held, we rank third in the world on this problem. First stands the squarefree case, closed by Balister, Bollob&#225;s, Morris, Sahasrabudhe, and Tiba, the largest structural result on this problem. Second, provisionally, is Schroeder's claim, which holds that place only until an independent kernel replay confirms or breaks it; that replay is ours, and it is next on our tower. Third is this house: the largest independently machine-checked exclusion published on this problem, to our knowledge, and the only continuous exact construction hunt running at the claimed floor scale anywhere in the world, as far as the public record shows. The problem itself remains open, for everyone. We intend to be there when it closes.</p>
+        <p>Eidon Labs Inc: https://eidonlabsinc.com</p>
+        <p>#Mathematics #NumberTheory #Erdos #FormalVerification #Lean4 #AIResearch #EidonLabs</p>
+      </div>
+    </section>
+
+    <footer>&copy; 2026 Eidon Labs Inc. All rights reserved. &middot; <a href="index.html">Home</a> &middot; <a href="msp.html">Managed IT Services</a> &middot; <a href="reports.html">Reports</a> &middot; <a href="https://github.com/EidonLabsInc">GitHub</a> &middot; <a href="https://www.facebook.com/joshua.henne.2025">Facebook</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms</a></footer>
+  </div>
+</body>
+</html>
